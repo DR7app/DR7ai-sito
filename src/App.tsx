@@ -401,7 +401,7 @@ export default function App() {
       {/* ACT 3 — REVEAL (product) */}
       <Moment dark id="prodotto" className="min-h-0 py-28 sm:py-36">
         <div className="reveal text-center">
-          <img src={LOGO} alt="DR7 AI" className="mx-auto h-14 sm:h-20 w-auto" />
+          <img src={LOGO} alt="DR7 AI" className="mx-auto h-28 sm:h-44 w-auto" />
           <h2 className="mx-auto mt-7 max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest">
             {t.reveal.h}
           </h2>
