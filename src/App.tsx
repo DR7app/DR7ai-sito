@@ -134,8 +134,13 @@ function InvoiceVisual({ t }: { t: any }) {
 function ChatAIVisual({ t }: { t: any }) {
   return (
     <div className="mx-auto w-full max-w-sm space-y-3 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
-      <ChatBubble side="in" sub="02:14">{t.cv.q}</ChatBubble>
-      <ChatBubble side="out" sub={t.cv.ai}>{t.cv.a}</ChatBubble>
+      <ChatBubble side="out" sub="WhatsApp">
+        <div className="space-y-1.5">
+          <div className="text-[10px] font-bold uppercase tracking-wide opacity-80">Messaggio automatico · DR7 A.I.</div>
+          <div>{t.cv.body}</div>
+        </div>
+      </ChatBubble>
+      <div className="text-center text-[10px] text-white/30">{t.cv.tag}</div>
     </div>
   )
 }
@@ -192,12 +197,12 @@ const CONTENT = {
     moments: {
       payments: { eyebrow: 'Incassi', h: 'Incassi prima ancora\nche il cliente arrivi.', sub: 'Un link Nexi su WhatsApp, cauzione pre-autorizzata, saldo tracciato. Basta rincorrere i pagamenti.' },
       invoice: { eyebrow: 'Fatturazione', h: 'La fattura\nsi scrive da sola.', sub: 'Ogni incasso diventa una fattura inviata al SDI. In automatico. Penali e danni inclusi.' },
-      whatsapp: { eyebrow: 'Assistente AI', h: 'Risponde\nanche mentre dormi.', sub: 'Un assistente AI gestisce conferme, promemoria e domande dei clienti. 24 ore su 24.' },
+      whatsapp: { eyebrow: 'Automazioni', h: 'Il messaggio giusto,\nal momento giusto.', sub: 'Conferme, promemoria di ritiro e richieste di recensione partono da soli. In automatico, su WhatsApp.' },
       docs: { eyebrow: 'AI Documenti', h: 'Una foto.\nTutti i dati.', sub: 'Scatta una patente o una carta d’identità: l’AI compila la scheda cliente in pochi secondi.' },
     },
     pv: { body: 'Salve, la sua prenotazione DR7-002F348E è stata registrata. Completi il pagamento di € 179,00 per confermare:', url: 'xpay.nexigroup.com/payment', expire: 'Il link scade tra 1 ora.', paid: 'Pagamento ricevuto · € 179,00' },
     iv: { title: 'Fattura DR7-2026-1484', status: 'Inviata a SDI', vat: 'IVA 22%', total: 'Totale' },
-    cv: { q: 'Buonasera, avete una Classe A per domani?', a: 'Sì! Disponibile da domani. Ti invio subito il link per prenotare.', ai: 'DR7 AI · risposta automatica' },
+    cv: { body: 'Promemoria: il ritiro della tua Ferrari 296 GTB è domani alle 10:00. Ti aspettiamo in sede.', tag: 'Inviato in automatico · 09:00' },
     dv: { fields: ['Nome e cognome', 'Numero patente', 'Scadenza', 'Indirizzo'] },
     integrationsTitle: 'Si integra con gli strumenti che già usi.',
     proofTitle: 'Non è teoria.\nÈ nato in un vero autonoleggio.',
@@ -250,12 +255,12 @@ const CONTENT = {
     moments: {
       payments: { eyebrow: 'Payments', h: 'Get paid before the\ncustomer even arrives.', sub: 'A Nexi link on WhatsApp, pre-authorized deposit, balance tracked. Stop chasing payments.' },
       invoice: { eyebrow: 'Invoicing', h: 'The invoice\nwrites itself.', sub: 'Every payment becomes an invoice sent to SDI. Automatically. Penalties and damages included.' },
-      whatsapp: { eyebrow: 'AI Assistant', h: 'It answers\neven while you sleep.', sub: 'An AI assistant handles confirmations, reminders and customer questions. 24/7.' },
+      whatsapp: { eyebrow: 'Automation', h: 'The right message,\nat the right moment.', sub: 'Confirmations, pickup reminders and review requests go out on their own. Automatically, over WhatsApp.' },
       docs: { eyebrow: 'AI Documents', h: 'One photo.\nAll the data.', sub: 'Snap a licence or ID: AI fills in the customer profile in seconds.' },
     },
     pv: { body: 'Hi, your booking DR7-002F348E is registered. Complete the € 179.00 payment to confirm:', url: 'xpay.nexigroup.com/payment', expire: 'The link expires in 1 hour.', paid: 'Payment received · € 179.00' },
     iv: { title: 'Invoice DR7-2026-1484', status: 'Sent to SDI', vat: 'VAT 22%', total: 'Total' },
-    cv: { q: 'Hi, do you have an A-Class for tomorrow?', a: "Yes! Available from tomorrow. I'll send you the booking link now.", ai: 'DR7 AI · automatic reply' },
+    cv: { body: 'Reminder: pickup of your Ferrari 296 GTB is tomorrow at 10:00. See you at our office.', tag: 'Sent automatically · 09:00' },
     dv: { fields: ['Full name', 'Licence number', 'Expiry', 'Address'] },
     integrationsTitle: 'Works with the tools you already use.',
     proofTitle: 'Not theory.\nBuilt inside a real rental business.',
