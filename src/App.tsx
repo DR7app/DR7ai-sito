@@ -73,7 +73,7 @@ function Moment({
   return (
     <section
       id={id}
-      className={`relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-24 ${
+      className={`relative flex flex-col items-center justify-center overflow-hidden px-6 py-20 sm:py-28 ${
         dark ? 'bg-ink text-white' : 'bg-white text-black'
       } ${className}`}
     >
@@ -103,13 +103,14 @@ function PaymentsVisual({ t }: { t: any }) {
   return (
     <div className="mx-auto w-full max-w-sm space-y-3 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
       <ChatBubble side="out" sub="WhatsApp">
-        {t.pv.link}
+        <div className="space-y-1.5">
+          <div className="text-[10px] font-bold uppercase tracking-wide opacity-80">Messaggio automatico · DR7 A.I.</div>
+          <div>{t.pv.body}</div>
+          <div className="truncate rounded-md bg-white/20 px-2 py-1 text-[11px]">🔗 {t.pv.url}</div>
+          <div className="text-[10px] opacity-70">{t.pv.expire}</div>
+        </div>
       </ChatBubble>
       <ChatBubble side="in">{t.pv.paid} ✓</ChatBubble>
-      <div className="flex items-center justify-between rounded-xl bg-[#28c840]/10 px-4 py-3 text-sm">
-        <span className="text-white/70">{t.pv.deposit}</span>
-        <span className="font-semibold text-[#28c840]">€ 1.500 ✓</span>
-      </div>
     </div>
   )
 }
@@ -194,7 +195,7 @@ const CONTENT = {
       whatsapp: { eyebrow: 'Assistente AI', h: 'Risponde\nanche mentre dormi.', sub: 'Un assistente AI gestisce conferme, promemoria e domande dei clienti. 24 ore su 24.' },
       docs: { eyebrow: 'AI Documenti', h: 'Una foto.\nTutti i dati.', sub: 'Scatta una patente o una carta d’identità: l’AI compila la scheda cliente in pochi secondi.' },
     },
-    pv: { link: 'Ecco il link per il pagamento del tuo noleggio 👇', paid: 'Pagamento ricevuto · € 179,00', deposit: 'Cauzione pre-autorizzata' },
+    pv: { body: 'Salve, la sua prenotazione DR7-002F348E è stata registrata. Completi il pagamento di € 179,00 per confermare:', url: 'xpay.nexigroup.com/payment', expire: 'Il link scade tra 1 ora.', paid: 'Pagamento ricevuto · € 179,00' },
     iv: { title: 'Fattura DR7-2026-1484', status: 'Inviata a SDI', vat: 'IVA 22%', total: 'Totale' },
     cv: { q: 'Buonasera, avete una Classe A per domani?', a: 'Sì! Disponibile da domani. Ti invio subito il link per prenotare.', ai: 'DR7 AI · risposta automatica' },
     dv: { fields: ['Nome e cognome', 'Numero patente', 'Scadenza', 'Indirizzo'] },
@@ -252,7 +253,7 @@ const CONTENT = {
       whatsapp: { eyebrow: 'AI Assistant', h: 'It answers\neven while you sleep.', sub: 'An AI assistant handles confirmations, reminders and customer questions. 24/7.' },
       docs: { eyebrow: 'AI Documents', h: 'One photo.\nAll the data.', sub: 'Snap a licence or ID: AI fills in the customer profile in seconds.' },
     },
-    pv: { link: "Here's the link to pay for your rental 👇", paid: 'Payment received · € 179.00', deposit: 'Deposit pre-authorized' },
+    pv: { body: 'Hi, your booking DR7-002F348E is registered. Complete the € 179.00 payment to confirm:', url: 'xpay.nexigroup.com/payment', expire: 'The link expires in 1 hour.', paid: 'Payment received · € 179.00' },
     iv: { title: 'Invoice DR7-2026-1484', status: 'Sent to SDI', vat: 'VAT 22%', total: 'Total' },
     cv: { q: 'Hi, do you have an A-Class for tomorrow?', a: "Yes! Available from tomorrow. I'll send you the booking link now.", ai: 'DR7 AI · automatic reply' },
     dv: { fields: ['Full name', 'Licence number', 'Expiry', 'Address'] },
@@ -386,7 +387,6 @@ export default function App() {
           </h1>
           <p className="mx-auto mt-7 max-w-xl text-lg sm:text-xl leading-relaxed text-white/40">{t.tension.sub}</p>
         </div>
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/30">↓</div>
       </Moment>
 
       {/* ACT 2 — SHIFT */}
@@ -399,7 +399,7 @@ export default function App() {
       </Moment>
 
       {/* ACT 3 — REVEAL (product) */}
-      <Moment dark id="prodotto" className="min-h-0 py-28 sm:py-36">
+      <Moment dark id="prodotto" className="py-20 sm:py-28">
         <div className="reveal text-center">
           <img src={LOGO} alt="DR7 AI" className="mx-auto h-28 sm:h-44 w-auto" />
           <h2 className="mx-auto mt-7 max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest">
@@ -446,7 +446,7 @@ export default function App() {
       </section>
 
       {/* ACT 5 — PROOF */}
-      <Moment dark className="min-h-0 py-28 sm:py-36">
+      <Moment dark className="py-20 sm:py-28">
         <h2 className="reveal mx-auto max-w-3xl whitespace-pre-line text-center text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
           {t.proofTitle}
         </h2>
@@ -461,7 +461,7 @@ export default function App() {
       </Moment>
 
       {/* ACT 6 — INVITATION: pricing */}
-      <section id="prezzi" className="bg-white text-black px-6 py-28 sm:py-36">
+      <section id="prezzi" className="bg-white text-black px-6 py-20 sm:py-28">
         <div className="mx-auto max-w-content">
           <div className="text-center reveal">
             <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">{t.pricing.h2}</h2>
@@ -490,7 +490,7 @@ export default function App() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="bg-white text-black px-6 pb-28 sm:pb-36">
+      <section id="faq" className="bg-white text-black px-6 pb-20 sm:pb-28">
         <div className="mx-auto max-w-content">
           <h2 className="mb-10 text-center text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight reveal">{t.faqTitle}</h2>
           <Faq items={t.faq} />
@@ -498,7 +498,7 @@ export default function App() {
       </section>
 
       {/* DEMO */}
-      <section id="demo" className="relative overflow-hidden px-6 py-28 sm:py-36 bg-gradient-to-b from-ink via-[#0b1220] to-ink">
+      <section id="demo" className="relative overflow-hidden px-6 py-20 sm:py-28 bg-gradient-to-b from-ink via-[#0b1220] to-ink">
         <div className="absolute left-1/2 top-0 -z-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#0a84ff]/20 blur-[120px]" />
         <div className="relative mx-auto max-w-3xl text-center reveal">
           <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">{t.demo.h2}</h2>
