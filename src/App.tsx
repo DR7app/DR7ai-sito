@@ -97,9 +97,8 @@ function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-content items-center justify-between px-6 h-14">
-        <a href="#top" className="flex items-center gap-2">
-          <img src={LOGO} alt="DR7 AI" className="h-7 w-auto" />
-          <span className="text-[17px] font-semibold tracking-tight">DR7 AI</span>
+        <a href="#top" className="flex items-center">
+          <img src={LOGO} alt="DR7 AI" className="h-10 sm:h-11 w-auto" />
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -165,7 +164,26 @@ function Navbar() {
 }
 
 // ── Dashboard mockup (pure CSS, premium look) ─────────────────
+type MockTab = 'panoramica' | 'prenotazioni' | 'flotta' | 'cauzioni'
+const MOCK_TABS: { id: MockTab; label: string }[] = [
+  { id: 'panoramica', label: 'Panoramica' },
+  { id: 'prenotazioni', label: 'Prenotazioni' },
+  { id: 'flotta', label: 'Flotta' },
+  { id: 'cauzioni', label: 'Cauzioni' },
+]
+
+function Badge({ children, tone }: { children: React.ReactNode; tone: 'green' | 'amber' | 'slate' | 'blue' }) {
+  const tones = {
+    green: 'bg-[#28c840]/15 text-[#28c840]',
+    amber: 'bg-amber-400/15 text-amber-300',
+    slate: 'bg-white/10 text-white/50',
+    blue: 'bg-[#0a84ff]/15 text-[#3ea0ff]',
+  }[tone]
+  return <span className={`rounded px-1.5 py-0.5 text-[9px] font-semibold ${tones}`}>{children}</span>
+}
+
 function DashboardMock() {
+  const [tab, setTab] = useState<MockTab>('panoramica')
   return (
     <div className="relative mx-auto w-full max-w-4xl reveal">
       <div className="absolute -inset-8 -z-10 rounded-[40px] bg-gradient-to-tr from-[#0a84ff]/20 via-cyan-400/10 to-transparent blur-3xl" />
@@ -175,54 +193,143 @@ function DashboardMock() {
           <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
           <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
           <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-          <span className="ml-3 text-xs text-white/40">dr7ai.com · Dashboard</span>
+          <span className="ml-3 text-xs text-white/40">dr7ai.com · Console</span>
+          <span className="ml-auto hidden items-center gap-1.5 text-[10px] text-[#28c840] sm:flex">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#28c840] animate-pulse" /> Live
+          </span>
         </div>
-        <div className="grid grid-cols-12 gap-3 p-3 sm:p-5">
-          {/* sidebar */}
-          <div className="col-span-3 hidden sm:flex flex-col gap-2">
-            {['Prenotazioni', 'Da Saldare', 'Fatture', 'Flotta', 'Clienti'].map((s, i) => (
-              <div
-                key={s}
-                className={`rounded-lg px-3 py-2 text-xs ${
-                  i === 1 ? 'bg-[#0a84ff]/20 text-white' : 'text-white/50'
-                }`}
-              >
-                {s}
-              </div>
-            ))}
-          </div>
-          {/* main */}
-          <div className="col-span-12 sm:col-span-9 space-y-3">
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                ['Incassato oggi', '€ 4.280'],
-                ['Da saldare', '€ 870'],
-                ['Prenotazioni', '23'],
-              ].map(([k, v]) => (
-                <div key={k} className="rounded-xl bg-white/[0.04] p-3">
-                  <div className="text-[10px] uppercase tracking-wide text-white/40">{k}</div>
-                  <div className="mt-1 text-base sm:text-xl font-semibold">{v}</div>
-                </div>
+
+        <div className="grid grid-cols-12">
+          {/* nav: horizontal scroll on mobile, sidebar on desktop */}
+          <div className="col-span-12 sm:col-span-3 sm:p-5">
+            <div className="flex gap-2 overflow-x-auto border-b border-white/5 p-3 sm:flex-col sm:overflow-visible sm:border-0 sm:p-0">
+              {MOCK_TABS.map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => setTab(t.id)}
+                  className={`whitespace-nowrap rounded-lg px-3 py-2 text-left text-xs transition ${
+                    tab === t.id ? 'bg-[#0a84ff]/20 text-white' : 'text-white/50 hover:text-white/80'
+                  }`}
+                >
+                  {t.label}
+                </button>
               ))}
             </div>
-            <div className="rounded-xl bg-white/[0.04] p-4">
-              <div className="mb-3 flex items-end justify-between">
-                <span className="text-xs text-white/50">Incassi settimanali</span>
-                <span className="text-xs text-[#28c840]">+18%</span>
-              </div>
-              <div className="flex h-24 items-end gap-2">
-                {[40, 65, 50, 80, 60, 95, 75].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-t bg-gradient-to-t from-[#0a84ff]/40 to-[#0a84ff]"
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
+          </div>
+
+          {/* main */}
+          <div className="col-span-12 sm:col-span-9 p-4 sm:p-5">
+            <div key={tab} className="animate-fade-in space-y-3">
+              {tab === 'panoramica' && (
+                <>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      ['Incassato oggi', '€ 4.280'],
+                      ['Da saldare', '€ 870'],
+                      ['Prenotazioni', '23'],
+                    ].map(([k, v]) => (
+                      <div key={k} className="rounded-xl bg-white/[0.04] p-3">
+                        <div className="text-[10px] uppercase tracking-wide text-white/40">{k}</div>
+                        <div className="mt-1 text-base font-semibold sm:text-xl">{v}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="rounded-xl bg-white/[0.04] p-4">
+                    <div className="mb-3 flex items-end justify-between">
+                      <span className="text-xs text-white/50">Incassi settimanali</span>
+                      <span className="text-xs text-[#28c840]">+18%</span>
+                    </div>
+                    <div className="flex h-24 items-end gap-2">
+                      {[40, 65, 50, 80, 60, 95, 75].map((h, i) => (
+                        <div
+                          key={i}
+                          className="flex-1 rounded-t bg-gradient-to-t from-[#0a84ff]/40 to-[#0a84ff]"
+                          style={{ height: `${h}%` }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {tab === 'prenotazioni' && (
+                <div className="overflow-hidden rounded-xl bg-white/[0.04]">
+                  {[
+                    ['Ferrari 296 GTB', 'Simone M. · 05–06 Giu', '€ 179', 'In corso', 'green'],
+                    ['Mercedes A45S', 'Michael M. · 01–03 Giu', '€ 558', 'Da saldare', 'amber'],
+                    ['Audi RS3', 'Klaus G. · 03–06 Giu', '€ 240', 'Chiuso', 'slate'],
+                  ].map(([car, meta, price, status, tone], i) => (
+                    <div
+                      key={i}
+                      className={`flex items-center justify-between p-3.5 text-xs ${i < 2 ? 'border-b border-white/5' : ''}`}
+                    >
+                      <div>
+                        <div className="font-semibold text-white">{car}</div>
+                        <div className="mt-0.5 text-[10px] text-white/40">{meta}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-semibold text-white">{price}</div>
+                        <div className="mt-0.5">
+                          <Badge tone={tone as 'green' | 'amber' | 'slate'}>{status}</Badge>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {tab === 'flotta' && (
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  {[
+                    ['Ferrari 296 GTB', 85, 'Prenotato', 'amber', 'bg-amber-400'],
+                    ['Mercedes A45S', 98, 'In strada', 'green', 'bg-[#28c840]'],
+                    ['Audi RS3', 45, 'Disponibile', 'blue', 'bg-[#0a84ff]'],
+                  ].map(([car, fuel, status, tone, bar], i) => (
+                    <div key={i} className="space-y-3 rounded-xl bg-white/[0.04] p-3.5 text-xs">
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="font-semibold text-white">{car}</span>
+                        <Badge tone={tone as 'green' | 'amber' | 'blue'}>{status}</Badge>
+                      </div>
+                      <div>
+                        <div className="mb-1 flex justify-between text-[10px] text-white/40">
+                          <span>Carburante</span>
+                          <span>{fuel}%</span>
+                        </div>
+                        <div className="h-1 w-full overflow-hidden rounded-full bg-white/10">
+                          <div className={`h-full ${bar}`} style={{ width: `${fuel}%` }} />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {tab === 'cauzioni' && (
+                <div className="space-y-2.5">
+                  {[
+                    ['Pre-autorizzazione · Ferrari 296', 'Visa · trattenuta', '€ 5.000', 'blue'],
+                    ['Fattura SDI · DR7-2026-1484', 'Trasmessa ad Agenzia Entrate', '€ 24,90', 'green'],
+                  ].map(([title, meta, amount, tone], i) => (
+                    <div key={i} className="flex items-center justify-between rounded-xl bg-white/[0.04] p-3.5 text-xs">
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`h-2 w-2 rounded-full ${tone === 'green' ? 'bg-[#28c840]' : 'bg-[#0a84ff]'}`}
+                        />
+                        <div>
+                          <div className="font-semibold text-white">{title}</div>
+                          <div className="mt-0.5 text-[10px] text-white/40">{meta}</div>
+                        </div>
+                      </div>
+                      <div className="font-semibold text-white">{amount}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
+      <p className="mt-4 text-center text-xs text-white/30">Demo interattiva — tocca le sezioni</p>
     </div>
   )
 }
@@ -679,9 +786,8 @@ export default function App() {
       {/* FOOTER */}
       <footer className="border-t border-white/5 bg-ink px-6 py-14">
         <div className="mx-auto flex max-w-content flex-col items-center gap-6 sm:flex-row sm:justify-between">
-          <div className="flex items-center gap-2">
-            <img src={LOGO} alt="DR7 AI" className="h-7 w-auto" />
-            <span className="font-semibold tracking-tight">DR7 AI</span>
+          <div className="flex items-center">
+            <img src={LOGO} alt="DR7 AI" className="h-10 w-auto" />
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/50">
             <a href="#funzionalita" className="hover:text-white">Funzionalità</a>
