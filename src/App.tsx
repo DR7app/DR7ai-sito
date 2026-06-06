@@ -123,9 +123,9 @@ function InvoiceVisual({ t }: { t: any }) {
         <span className="rounded-full bg-[#28c840]/15 px-2 py-0.5 text-xs font-medium text-[#1a9c33]">{t.iv.status}</span>
       </div>
       <div className="space-y-2 py-4 text-sm">
-        <div className="flex justify-between text-black/60"><span>Prime Full Clean</span><span>€ 20,41</span></div>
-        <div className="flex justify-between text-black/60"><span>{t.iv.vat}</span><span>€ 4,49</span></div>
-        <div className="flex justify-between border-t border-black/10 pt-2 font-semibold"><span>{t.iv.total}</span><span>€ 24,90</span></div>
+        <div className="flex justify-between text-black/60"><span>Noleggio Ferrari 296 GTB · 3 gg</span><span>€ 1.475,41</span></div>
+        <div className="flex justify-between text-black/60"><span>{t.iv.vat}</span><span>€ 324,59</span></div>
+        <div className="flex justify-between border-t border-black/10 pt-2 font-semibold"><span>{t.iv.total}</span><span>€ 1.800,00</span></div>
       </div>
     </div>
   )
