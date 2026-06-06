@@ -339,7 +339,7 @@ function CapabilityMoment({ m, dark, visual, id }: { m: { eyebrow: string; h: st
       <div className="mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-2">
         <div className="reveal text-center md:text-left">
           <p className="text-sm font-semibold uppercase tracking-widest text-[#0a84ff]">{m.eyebrow}</p>
-          <h2 className={`mt-4 whitespace-pre-line text-4xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] tracking-tight ${dark ? '' : 'text-black'}`}>
+          <h2 className={`mt-4 whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] tracking-tight ${dark ? '' : 'text-black'}`}>
             {m.h}
           </h2>
           <p className={`mx-auto md:mx-0 mt-6 max-w-md text-lg leading-relaxed ${dark ? 'text-white/55' : 'text-black/55'}`}>{m.sub}</p>
@@ -381,7 +381,7 @@ export default function App() {
       {/* ACT 1 — TENSION */}
       <Moment dark>
         <div className="reveal text-center">
-          <h1 className="mx-auto max-w-4xl whitespace-pre-line text-5xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest text-white/90">
+          <h1 className="mx-auto max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest text-white/90">
             {t.tension.h}
           </h1>
           <p className="mx-auto mt-7 max-w-xl text-lg sm:text-xl leading-relaxed text-white/40">{t.tension.sub}</p>
@@ -392,7 +392,7 @@ export default function App() {
       {/* ACT 2 — SHIFT */}
       <Moment dark className="bg-gradient-to-b from-ink via-[#0b1220] to-ink">
         <div className="reveal text-center">
-          <h2 className="mx-auto max-w-4xl whitespace-pre-line text-5xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest">
+          <h2 className="mx-auto max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest">
             <span className="bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent">{t.shift.h}</span>
           </h2>
         </div>
@@ -402,7 +402,7 @@ export default function App() {
       <Moment dark id="prodotto" className="min-h-0 py-28 sm:py-36">
         <div className="reveal text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#0a84ff]">{t.reveal.eyebrow}</p>
-          <h2 className="mx-auto mt-5 max-w-4xl whitespace-pre-line text-5xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest">
+          <h2 className="mx-auto mt-5 max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest">
             {t.reveal.h}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed text-white/60">{t.reveal.sub}</p>
@@ -447,7 +447,7 @@ export default function App() {
 
       {/* ACT 5 — PROOF */}
       <Moment dark className="min-h-0 py-28 sm:py-36">
-        <h2 className="reveal mx-auto max-w-3xl whitespace-pre-line text-center text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
+        <h2 className="reveal mx-auto max-w-3xl whitespace-pre-line text-center text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
           {t.proofTitle}
         </h2>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -464,7 +464,7 @@ export default function App() {
       <section id="prezzi" className="bg-white text-black px-6 py-28 sm:py-36">
         <div className="mx-auto max-w-content">
           <div className="text-center reveal">
-            <h2 className="mx-auto max-w-2xl whitespace-pre-line text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight">{t.pricing.h2}</h2>
+            <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">{t.pricing.h2}</h2>
             <p className="mt-5 mx-auto max-w-2xl text-lg text-black/50">{t.pricing.sub}</p>
           </div>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -501,7 +501,7 @@ export default function App() {
       <section id="demo" className="relative overflow-hidden px-6 py-28 sm:py-36 bg-gradient-to-b from-ink via-[#0b1220] to-ink">
         <div className="absolute left-1/2 top-0 -z-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#0a84ff]/20 blur-[120px]" />
         <div className="relative mx-auto max-w-3xl text-center reveal">
-          <h2 className="mx-auto max-w-2xl whitespace-pre-line text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight">{t.demo.h2}</h2>
+          <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">{t.demo.h2}</h2>
           <p className="mt-5 text-lg text-white/60">{t.demo.sub}</p>
           {demoSent ? (
             <div className="mx-auto mt-10 max-w-xl rounded-2xl border border-[#28c840]/30 bg-[#28c840]/10 p-8 text-center">
