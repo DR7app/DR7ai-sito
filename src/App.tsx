@@ -230,7 +230,7 @@ const CONTENT = {
       nome: 'Nome', azienda: 'Azienda', email: 'Email', telefono: 'Telefono', veicoli: 'Numero di veicoli (facoltativo)',
       send: 'Prenota una demo', sending: 'Invio in corso…',
       okTitle: 'Grazie! Richiesta ricevuta.', okSub: 'Ti contattiamo entro 24 ore per fissare la demo.',
-      note: 'Nessun impegno · Risposta entro 24h', err: 'Invio non riuscito. Riprova o scrivici a info@dr7ai.com.',
+      note: 'Nessun impegno · Risposta entro 24h', err: 'Invio non riuscito. Riprova o scrivici a info@dr7.app.',
     },
     footer: { demo: 'Demo', pricing: 'Prezzi', faq: 'FAQ' },
   },
@@ -288,7 +288,7 @@ const CONTENT = {
       nome: 'Name', azienda: 'Company', email: 'Email', telefono: 'Phone', veicoli: 'Number of vehicles (optional)',
       send: 'Book a demo', sending: 'Sending…',
       okTitle: 'Thank you! Request received.', okSub: "We'll contact you within 24 hours to schedule the demo.",
-      note: 'No commitment · Reply within 24h', err: 'Sending failed. Please retry or email us at info@dr7ai.com.',
+      note: 'No commitment · Reply within 24h', err: 'Sending failed. Please retry or email us at info@dr7.app.',
     },
     footer: { demo: 'Demo', pricing: 'Pricing', faq: 'FAQ' },
   },
@@ -535,6 +535,7 @@ export default function App() {
             <a href="#prezzi" className="hover:text-white">{t.footer.pricing}</a>
             <a href="#faq" className="hover:text-white">{t.footer.faq}</a>
             <a href="#demo" className="hover:text-white">{t.footer.demo}</a>
+            <a href="mailto:info@dr7.app" className="hover:text-white">info@dr7.app</a>
           </div>
           <div className="text-sm text-white/30">© 2026 DR7 AI</div>
         </div>
