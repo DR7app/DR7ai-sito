@@ -199,11 +199,11 @@ const CONTENT = {
     cv: { q: 'Buonasera, avete una Classe A per domani?', a: 'Sì! Disponibile da domani. Ti invio subito il link per prenotare.', ai: 'DR7 AI · risposta automatica' },
     dv: { fields: ['Nome e cognome', 'Numero patente', 'Scadenza', 'Indirizzo'] },
     integrationsTitle: 'Si integra con gli strumenti che già usi.',
-    proofTitle: 'Chi gestisce con DR7 AI\nnon torna più indietro.',
-    testimonials: [
-      ['“Incasso prima ancora che il cliente arrivi in sede. Le insolvenze sono sparite.”', 'Marco R.', 'Autonoleggio · Cagliari'],
-      ['“Le fatture partono da sole verso SDI. Ho ridotto le ore in amministrazione del 70%.”', 'Giulia M.', 'Rent & Wash · Olbia'],
-      ['“L’assistente WhatsApp risponde ai clienti di notte. Sembra di avere un dipendente in più.”', 'Andrea P.', 'Supercar Rental · Milano'],
+    proofTitle: 'Non è teoria.\nÈ nato in un vero autonoleggio.',
+    proofPoints: [
+      ['Provato sul campo', 'Usato ogni giorno su prenotazioni, lavaggi e fatture reali — non in laboratorio.'],
+      ['Pagamenti veri', 'Nexi, cauzioni pre-autorizzate e invio al SDI testati su transazioni reali.'],
+      ['Pensato da chi noleggia', 'Ogni funzione nasce da un problema concreto di chi gestisce una flotta.'],
     ],
     pricing: {
       h2: 'Un prezzo su misura\nper la tua attività.',
@@ -257,11 +257,11 @@ const CONTENT = {
     cv: { q: 'Hi, do you have an A-Class for tomorrow?', a: "Yes! Available from tomorrow. I'll send you the booking link now.", ai: 'DR7 AI · automatic reply' },
     dv: { fields: ['Full name', 'Licence number', 'Expiry', 'Address'] },
     integrationsTitle: 'Works with the tools you already use.',
-    proofTitle: "Once you run on DR7 AI,\nyou don't go back.",
-    testimonials: [
-      ['“I get paid before the customer even reaches the office. No-shows and unpaid balances are gone.”', 'Marco R.', 'Car rental · Cagliari'],
-      ['“Invoices go to SDI on their own. I cut admin hours by 70%.”', 'Giulia M.', 'Rent & Wash · Olbia'],
-      ['“The WhatsApp assistant answers customers at night. It’s like having an extra employee.”', 'Andrea P.', 'Supercar Rental · Milan'],
+    proofTitle: 'Not theory.\nBuilt inside a real rental business.',
+    proofPoints: [
+      ['Field-tested', 'Used every day on real bookings, washes and invoices — not in a lab.'],
+      ['Real payments', 'Nexi, pre-authorized deposits and SDI submission tested on real transactions.'],
+      ['Built by operators', 'Every feature comes from a real problem fleet operators face.'],
     ],
     pricing: {
       h2: 'Pricing tailored\nto your business.',
@@ -451,13 +451,10 @@ export default function App() {
           {t.proofTitle}
         </h2>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {t.testimonials.map(([q, n, r]) => (
-            <div key={n} className="reveal rounded-3xl border border-white/10 bg-white/[0.03] p-7">
-              <p className="text-lg leading-relaxed text-white/85">{q}</p>
-              <div className="mt-6">
-                <div className="text-sm font-semibold">{n}</div>
-                <div className="text-sm text-white/40">{r}</div>
-              </div>
+          {t.proofPoints.map(([title, body]) => (
+            <div key={title} className="reveal rounded-3xl border border-white/10 bg-white/[0.03] p-7">
+              <h3 className="text-lg font-semibold">{title}</h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-white/55">{body}</p>
             </div>
           ))}
         </div>
