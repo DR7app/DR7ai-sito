@@ -431,16 +431,14 @@ const INTEGRATIONS = ['Nexi', 'Aruba · SDI', 'WhatsApp', 'Google Analytics', 'S
 const PRICING = [
   {
     name: 'Starter',
-    price: '€49',
-    period: '/mese',
+    scope: 'Piccole flotte',
     tagline: 'Per iniziare a digitalizzare.',
     features: ['Fino a 10 veicoli', 'Prenotazioni & calendario', 'Pagamenti Nexi Pay-by-Link', 'Schede cliente'],
     highlight: false,
   },
   {
     name: 'Pro',
-    price: '€99',
-    period: '/mese',
+    scope: 'Flotte in crescita',
     tagline: 'Il più scelto dai noleggi.',
     features: [
       'Tutto di Starter',
@@ -453,9 +451,8 @@ const PRICING = [
   },
   {
     name: 'Enterprise',
-    price: 'Su misura',
-    period: '',
-    tagline: 'Multi-sede e flotte grandi.',
+    scope: 'Multi-sede & luxury',
+    tagline: 'Grandi flotte e più sedi.',
     features: ['Veicoli illimitati', 'Multi-sede', 'API & integrazioni dedicate', 'Supporto prioritario'],
     highlight: false,
   },
@@ -752,9 +749,12 @@ export default function App() {
         <div className="mx-auto max-w-content">
           <div className="text-center reveal">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">
-              Un piano per ogni dimensione.
+              Un prezzo su misura per la tua attività.
             </h2>
-            <p className="mt-4 text-lg text-black/50">Senza vincoli. Disdici quando vuoi.</p>
+            <p className="mt-4 mx-auto max-w-2xl text-lg text-black/50">
+              Ogni flotta è diversa. Costruiamo il piano giusto in base a veicoli, sedi e volumi —
+              nessun costo nascosto, nessun vincolo.
+            </p>
           </div>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
             {PRICING.map((p) => (
@@ -775,11 +775,11 @@ export default function App() {
                 <p className={`mt-1 text-sm ${p.highlight ? 'text-white/50' : 'text-black/50'}`}>
                   {p.tagline}
                 </p>
-                <div className="mt-6 flex items-end gap-1">
-                  <span className="text-4xl font-semibold tracking-tight">{p.price}</span>
-                  <span className={`mb-1 text-sm ${p.highlight ? 'text-white/50' : 'text-black/50'}`}>
-                    {p.period}
-                  </span>
+                <div className="mt-6">
+                  <span className="text-3xl font-semibold tracking-tight">Su misura</span>
+                  <p className={`mt-1 text-sm ${p.highlight ? 'text-white/50' : 'text-black/50'}`}>
+                    {p.scope}
+                  </p>
                 </div>
                 <a
                   href="#demo"
@@ -787,7 +787,7 @@ export default function App() {
                     p.highlight ? 'bg-[#0a84ff] text-white hover:bg-[#0a84ff]/90' : 'bg-black text-white hover:bg-black/80'
                   }`}
                 >
-                  Prenota una demo
+                  Richiedi un preventivo
                 </a>
                 <ul className="mt-7 space-y-3 text-[15px]">
                   {p.features.map((f) => (
@@ -801,7 +801,7 @@ export default function App() {
             ))}
           </div>
           <p className="mt-8 text-center text-sm text-black/40">
-            Prezzi indicativi IVA esclusa. Personalizziamo il piano sulla tua flotta.
+            Nessun costo nascosto. Il prezzo viene definito insieme, in base alla tua flotta, durante la demo.
           </p>
         </div>
       </section>
