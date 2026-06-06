@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 /* ────────────────────────────────────────────────────────────
    DR7 AI — landing page (Apple-style, Italian, mobile-first)
@@ -448,6 +448,29 @@ function Faq() {
 // ── App ───────────────────────────────────────────────────────
 export default function App() {
   useReveal()
+  const [demoSent, setDemoSent] = useState(false)
+  const [demoSending, setDemoSending] = useState(false)
+
+  async function handleDemoSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const form = e.currentTarget
+    const body = new URLSearchParams(new FormData(form) as any).toString()
+    setDemoSending(true)
+    try {
+      // Netlify Forms: POST the encoded data back to the site root.
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      })
+      setDemoSent(true)
+      form.reset()
+    } catch {
+      alert('Invio non riuscito. Riprova o scrivici a info@dr7ai.com.')
+    } finally {
+      setDemoSending(false)
+    }
+  }
 
   return (
     <div id="top" className="bg-ink text-white antialiased">
@@ -760,25 +783,39 @@ export default function App() {
             Prenota una demo gratuita. Ti mostriamo DR7 AI sui tuoi numeri reali.
           </p>
 
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              alert('Grazie! Ti contatteremo a breve per la demo.')
-            }}
-            className="mx-auto mt-10 grid max-w-xl grid-cols-1 gap-3 text-left sm:grid-cols-2"
-          >
-            <input required placeholder="Nome" className="input" />
-            <input required placeholder="Azienda" className="input" />
-            <input required type="email" placeholder="Email" className="input" />
-            <input required placeholder="Telefono" className="input" />
-            <input placeholder="Numero di veicoli" className="input sm:col-span-2" />
-            <button
-              type="submit"
-              className="sm:col-span-2 mt-2 rounded-full bg-[#0a84ff] py-3.5 text-[15px] font-medium text-white transition-all hover:bg-[#0a84ff]/90 active:scale-[0.98]"
+          {demoSent ? (
+            <div className="mx-auto mt-10 max-w-xl rounded-2xl border border-[#28c840]/30 bg-[#28c840]/10 p-8 text-center">
+              <div className="text-3xl text-[#28c840]">✓</div>
+              <p className="mt-3 text-lg font-medium text-white">Grazie! Richiesta ricevuta.</p>
+              <p className="mt-1 text-sm text-white/60">Ti contattiamo entro 24 ore per fissare la demo.</p>
+            </div>
+          ) : (
+            <form
+              name="demo"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={handleDemoSubmit}
+              className="mx-auto mt-10 grid max-w-xl grid-cols-1 gap-3 text-left sm:grid-cols-2"
             >
-              Prenota una demo
-            </button>
-          </form>
+              <input type="hidden" name="form-name" value="demo" />
+              <p className="hidden">
+                <label>Non compilare: <input name="bot-field" /></label>
+              </p>
+              <input required name="nome" placeholder="Nome" className="input" />
+              <input required name="azienda" placeholder="Azienda" className="input" />
+              <input required type="email" name="email" placeholder="Email" className="input" />
+              <input required name="telefono" type="tel" placeholder="Telefono" className="input" />
+              <input name="veicoli" placeholder="Numero di veicoli (facoltativo)" className="input sm:col-span-2" />
+              <button
+                type="submit"
+                disabled={demoSending}
+                className="sm:col-span-2 mt-2 rounded-full bg-[#0a84ff] py-3.5 text-[15px] font-medium text-white transition-all hover:bg-[#0a84ff]/90 active:scale-[0.98] disabled:opacity-60"
+              >
+                {demoSending ? 'Invio in corso…' : 'Prenota una demo'}
+              </button>
+            </form>
+          )}
           <p className="mt-4 text-xs text-white/40">Nessun impegno · Risposta entro 24h</p>
         </div>
       </section>

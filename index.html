@@ -20,6 +20,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <!-- Netlify Forms detection (SPA): static copy so the build registers the "demo" form -->
+    <form name="demo" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nome" />
+      <input type="text" name="azienda" />
+      <input type="email" name="email" />
+      <input type="text" name="telefono" />
+      <input type="text" name="veicoli" />
+      <input type="text" name="bot-field" />
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
