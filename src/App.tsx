@@ -178,7 +178,7 @@ function Faq({ items }: { items: readonly (readonly [string, string])[] }) {
 const CONTENT = {
   it: {
     nav: { story: 'Storia', pricing: 'Prezzi', faq: 'FAQ', demo: 'Prenota una demo' },
-    tension: { h: 'Gestire un noleggio\nè un caos.', sub: 'Fogli Excel, chat WhatsApp, contratti di carta, pagamenti da rincorrere. Ogni giorno.' },
+    tension: { h: 'Gestisci il tuo noleggio\ncon assoluta precisione.', sub: 'Una sola piattaforma intelligente per prenotazioni, incassi e fatturazione.' },
     shift: { h: 'E se tutto parlasse\nla stessa lingua?' },
     reveal: {
       eyebrow: 'DR7 AI',
@@ -236,7 +236,7 @@ const CONTENT = {
   },
   en: {
     nav: { story: 'Story', pricing: 'Pricing', faq: 'FAQ', demo: 'Book a demo' },
-    tension: { h: 'Running a rental\nis chaos.', sub: 'Spreadsheets, WhatsApp chats, paper contracts, payments to chase. Every single day.' },
+    tension: { h: 'Run your rental business\nwith absolute precision.', sub: 'One intelligent platform for bookings, payments and invoicing.' },
     shift: { h: 'What if it all spoke\nthe same language?' },
     reveal: {
       eyebrow: 'DR7 AI',
