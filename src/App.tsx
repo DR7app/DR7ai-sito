@@ -337,36 +337,94 @@ function DashboardMock() {
 // ── Feature data ──────────────────────────────────────────────
 const FEATURES = [
   {
-    icon: '🗓️',
+    icon: 'calendar',
     title: 'Prenotazioni & Calendario',
     body: 'Noleggi, lavaggi e officina in un unico calendario. Disponibilità in tempo reale e zero doppie prenotazioni.',
   },
   {
-    icon: '💳',
+    icon: 'card',
     title: 'Pagamenti & Cauzioni',
     body: 'Pay-by-Link Nexi, pre-autorizzazioni, addebiti ricorrenti e wallet a credito. Incassi prima ancora che il cliente arrivi.',
   },
   {
-    icon: '🧾',
+    icon: 'invoice',
     title: 'Fatturazione Elettronica',
     body: 'Fatture verso SDI in automatico — anche per penali e danni. Basta copia-incolla con il commercialista.',
   },
   {
-    icon: '🤖',
+    icon: 'chat',
     title: 'Automazioni WhatsApp AI',
     body: 'Conferme, link di pagamento e promemoria partono da soli. Un assistente AI risponde ai clienti 24/7.',
   },
   {
-    icon: '📸',
+    icon: 'doc',
     title: 'AI per i documenti',
     body: "Scatta una foto di patente o carta d'identità: l'AI legge e compila i dati del cliente in pochi secondi.",
   },
   {
-    icon: '🚗',
+    icon: 'car',
     title: 'Flotta, CRM & Fedeltà',
     body: 'Veicoli, scadenze, fornitori, schede cliente e wallet fedeltà. Tutto collegato, tutto sotto controllo.',
   },
 ]
+
+// ── Feature icons (minimal line SVGs, no emojis) ──────────────
+function FeatureIcon({ name }: { name: string }) {
+  const common = {
+    width: 22,
+    height: 22,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.6,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+  }
+  const paths: Record<string, React.ReactNode> = {
+    calendar: (
+      <>
+        <rect x="3" y="4.5" width="18" height="16" rx="2" />
+        <path d="M3 9h18M8 2.5v4M16 2.5v4" />
+      </>
+    ),
+    card: (
+      <>
+        <rect x="2.5" y="5" width="19" height="14" rx="2" />
+        <path d="M2.5 10h19M6 15h4" />
+      </>
+    ),
+    invoice: (
+      <>
+        <path d="M6 2.5h8l4 4v15H6z" />
+        <path d="M14 2.5v4h4M9 12h6M9 16h6M9 8h2" />
+      </>
+    ),
+    chat: (
+      <>
+        <path d="M4 5h16v11H9l-4 3v-3H4z" />
+        <path d="M8 10h.01M12 10h.01M16 10h.01" />
+      </>
+    ),
+    doc: (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M8 8h8M8 12h8M8 16h5" />
+      </>
+    ),
+    car: (
+      <>
+        <path d="M3 13l2-5a2 2 0 0 1 1.9-1.3h10.2A2 2 0 0 1 19 8l2 5v5h-3v-2H6v2H3z" />
+        <circle cx="7.5" cy="16" r="1.3" />
+        <circle cx="16.5" cy="16" r="1.3" />
+      </>
+    ),
+  }
+  return (
+    <svg {...common} aria-hidden="true">
+      {paths[name] ?? null}
+    </svg>
+  )
+}
 
 const INTEGRATIONS = ['Nexi', 'Aruba · SDI', 'WhatsApp', 'Google Analytics', 'Supabase']
 
@@ -507,7 +565,18 @@ export default function App() {
         </div>
 
         <div className="mt-16 sm:mt-20">
-          <DashboardMock />
+          <div className="relative mx-auto w-full max-w-5xl reveal">
+            <div className="absolute -inset-8 -z-10 rounded-[40px] bg-gradient-to-tr from-[#0a84ff]/25 via-cyan-400/10 to-transparent blur-3xl" />
+            <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/60">
+              <div className="flex items-center gap-2 border-b border-white/5 bg-[#1a1a1c] px-4 py-3">
+                <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+                <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+                <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+                <span className="ml-3 text-xs text-white/40">dr7ai.com · Dashboard</span>
+              </div>
+              <img src="/dashboard.png" alt="Dashboard DR7 AI" className="block w-full" />
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -539,7 +608,9 @@ export default function App() {
                 key={f.title}
                 className="reveal rounded-3xl bg-white p-7 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className="text-3xl">{f.icon}</div>
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#0a84ff]/10 text-[#0a84ff]">
+                  <FeatureIcon name={f.icon} />
+                </div>
                 <h3 className="mt-5 text-xl font-semibold tracking-tight">{f.title}</h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-black/55">{f.body}</p>
               </div>
