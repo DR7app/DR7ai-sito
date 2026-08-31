@@ -1,11 +1,53 @@
 [build]
-  command = "npm run build"
+  # Lo stampo della piattaforma (struttura di produzione + configurazione di
+  # partenza) viene rigenerato a ogni pubblicazione, non vive nel repository:
+  # questo repository e' pubblico e quei file contengono lo schema completo e
+  # i modelli di messaggio con recapiti reali.
+  #
+  # Se SUPABASE_ACCESS_TOKEN e SUPABASE_PROD_REF non ci sono, il sito si
+  # pubblica lo stesso: la vetrina funziona e il portale dice chiaramente che
+  # lo stampo manca, invece di creare aziende a meta'.
+  command = "python3 scripts/schema/aggiorna.py || echo 'ATTENZIONE: stampo non aggiornato'; npm run build"
   publish = "dist"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
 
-# SPA fallback — serve index.html for client-side routes
+# Lo schema della piattaforma e la configurazione di partenza devono entrare
+# nel pacchetto delle funzioni: senza, il portale non puo' creare niente.
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["schema/**"]
+
+# ─── PROXY DELLE AZIENDE ──────────────────────────────────────────────────────
+# dr7ai.com/NOMEAZIENDA -> sito dell'azienda. Legge il registro a ogni giro,
+# quindi aggiungere un'azienda non richiede di ripubblicare questo sito.
+[[edge_functions]]
+  function = "tenant-proxy"
+  path = "/*"
+
+# ─── RICHIAMO PERIODICO ───────────────────────────────────────────────────────
+# Creare un'istanza dura piu' di una chiamata: questo cron rimette al lavoro
+# l'operaio finche' tutti i passi non sono riusciti.
+[functions."portal-cron"]
+  schedule = "*/2 * * * *"
+
+# ─── INTESTAZIONI ─────────────────────────────────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# ─── SPA ──────────────────────────────────────────────────────────────────────
+# Ultima regola: quello che non e' un'azienda e non e' un file resta al sito.
 [[redirects]]
   from = "/*"
   to = "/index.html"
