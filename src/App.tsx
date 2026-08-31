@@ -7,6 +7,18 @@ import React, { useEffect, useState } from 'react'
    ──────────────────────────────────────────────────────────── */
 
 const LOGO = '/dr7-logo.png'
+
+/* Link YouTube della demo: incollare qui l'URL completo del video
+   (es. 'https://www.youtube.com/watch?v=XXXXXXXXXXX').
+   Finche' resta vuoto, i pulsanti "Guarda la demo" riportano in cima alla pagina. */
+const YOUTUBE_URL = ''
+const DEMO_HREF = YOUTUBE_URL || '#top'
+
+// Un link esterno si apre in una nuova scheda; un'ancora interna no.
+function linkTarget(href: string) {
+  return href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {}
+}
+
 type Lang = 'it' | 'en'
 
 // ── Scroll-reveal hook ────────────────────────────────────────
@@ -52,7 +64,7 @@ function Btn({
     ghost: 'text-white/90 hover:text-white border border-white/15 hover:border-white/30 backdrop-blur',
   }[variant]
   return (
-    <a href={href} className={`${base} ${styles} ${full ? 'w-full sm:w-auto' : ''}`}>
+    <a href={href} {...linkTarget(href)} className={`${base} ${styles} ${full ? 'w-full sm:w-auto' : ''}`}>
       {children}
     </a>
   )
@@ -184,14 +196,14 @@ function Faq({ items }: { items: readonly (readonly [string, string])[] }) {
 // ── Content (IT / EN) ─────────────────────────────────────────
 const CONTENT = {
   it: {
-    nav: { story: 'Storia', pricing: 'Prezzi', faq: 'FAQ', demo: 'Prenota una demo' },
+    nav: { story: 'Storia', pricing: 'Prezzi', faq: 'FAQ', demo: 'Guarda la demo' },
     tension: { h: 'Gestisci il tuo noleggio\ncon assoluta precisione.', sub: 'Una sola piattaforma intelligente per prenotazioni, incassi e fatturazione.' },
     shift: { h: 'E se tutto parlasse\nla stessa lingua?' },
     reveal: {
       eyebrow: 'DR7 AI',
       h: 'Una piattaforma.\nTutto il tuo business.',
       sub: 'Prenotazioni, incassi, fatturazione e WhatsApp automatico — uniti da un’unica intelligenza.',
-      cta1: 'Prenota una demo',
+      cta1: 'Guarda la demo',
       cta2: 'Guarda come funziona',
       frame: 'dr7ai.com · Dashboard',
     },
@@ -216,7 +228,7 @@ const CONTENT = {
       h2: 'Un prezzo su misura\nper la tua attività.',
       sub: 'Ogni flotta è diversa. Costruiamo il piano giusto in base a veicoli, sedi e volumi — nessun costo nascosto, nessun vincolo.',
       popular: 'Più scelto', custom: 'Su misura', cta: 'Richiedi un preventivo',
-      note: 'Nessun costo nascosto. Il prezzo viene definito insieme, in base alla tua flotta, durante la demo.',
+      note: 'Nessun costo nascosto. Il prezzo viene definito insieme, in base alla tua flotta.',
       tiers: [
         { name: 'Starter', scope: 'Piccole flotte', features: ['Fino a 10 veicoli', 'Prenotazioni & calendario', 'Pagamenti Nexi Pay-by-Link', 'Schede cliente'], highlight: false },
         { name: 'Pro', scope: 'Flotte in crescita', features: ['Tutto di Starter', 'Fatturazione elettronica SDI', 'Automazioni WhatsApp con AI', 'AI lettura documenti', 'Wallet fedeltà & referral'], highlight: true },
@@ -228,28 +240,26 @@ const CONTENT = {
       ['Posso migrare i miei dati attuali?', 'Sì. Ti aiutiamo a importare clienti, veicoli e prenotazioni esistenti durante l’onboarding, senza fermare l’attività.'],
       ['È conforme alla fatturazione elettronica?', 'Assolutamente. DR7 AI invia le fatture al Sistema di Interscambio (SDI) tramite Aruba, incluse penali e danni, con note di credito.'],
       ['Che supporto offrite?', 'Supporto in italiano e inglese via WhatsApp ed email. I piani Pro ed Enterprise hanno priorità e onboarding dedicato.'],
-      ['Esiste una prova gratuita?', 'Sì, puoi provare DR7 AI senza impegno. Prenota una demo e attiviamo il tuo ambiente di prova.'],
+      ['Esiste una prova gratuita?', 'Sì, puoi provare DR7 AI senza impegno. Scrivici a info@dr7ai.com e attiviamo il tuo ambiente di prova.'],
       ['I dati sono al sicuro?', 'I dati sono cifrati e ospitati su infrastruttura europea, con backup continui e accessi a permessi/ruoli.'],
     ],
     demo: {
       h2: 'Pronto a digitalizzare\nil tuo noleggio?',
-      sub: 'Prenota una demo gratuita. Ti mostriamo DR7 AI sui tuoi numeri reali.',
-      nome: 'Nome', azienda: 'Azienda', email: 'Email', telefono: 'Telefono', veicoli: 'Numero di veicoli (facoltativo)',
-      send: 'Prenota una demo', sending: 'Invio in corso…',
-      okTitle: 'Grazie! Richiesta ricevuta.', okSub: 'Ti contattiamo entro 24 ore per fissare la demo.',
-      note: 'Nessun impegno · Risposta entro 24h', err: 'Invio non riuscito. Riprova o scrivici a info@dr7ai.com.',
+      sub: 'Guarda la demo completa di DR7 AI in video.',
+      cta: 'Guarda la demo',
+      note: 'Nessun impegno · Per informazioni: info@dr7ai.com',
     },
     footer: { demo: 'Demo', pricing: 'Prezzi', faq: 'FAQ' },
   },
   en: {
-    nav: { story: 'Story', pricing: 'Pricing', faq: 'FAQ', demo: 'Book a demo' },
+    nav: { story: 'Story', pricing: 'Pricing', faq: 'FAQ', demo: 'Watch the demo' },
     tension: { h: 'Run your rental business\nwith absolute precision.', sub: 'One intelligent platform for bookings, payments and invoicing.' },
     shift: { h: 'What if it all spoke\nthe same language?' },
     reveal: {
       eyebrow: 'DR7 AI',
       h: 'One platform.\nYour entire business.',
       sub: 'Bookings, payments, invoicing and automated WhatsApp — united by a single intelligence.',
-      cta1: 'Book a demo',
+      cta1: 'Watch the demo',
       cta2: 'See how it works',
       frame: 'dr7ai.com · Dashboard',
     },
@@ -274,7 +284,7 @@ const CONTENT = {
       h2: 'Pricing tailored\nto your business.',
       sub: 'Every fleet is different. We build the right plan around vehicles, locations and volumes — no hidden costs, no lock-in.',
       popular: 'Most popular', custom: 'Custom', cta: 'Request a quote',
-      note: 'No hidden costs. Pricing is defined together, based on your fleet, during the demo.',
+      note: 'No hidden costs. Pricing is defined together, based on your fleet.',
       tiers: [
         { name: 'Starter', scope: 'Small fleets', features: ['Up to 10 vehicles', 'Bookings & calendar', 'Nexi Pay-by-Link payments', 'Customer profiles'], highlight: false },
         { name: 'Pro', scope: 'Growing fleets', features: ['Everything in Starter', 'SDI e-invoicing', 'AI WhatsApp automation', 'AI document reading', 'Loyalty wallet & referrals'], highlight: true },
@@ -286,16 +296,14 @@ const CONTENT = {
       ['Can I migrate my existing data?', 'Yes. We help you import existing customers, vehicles and bookings during onboarding, without stopping your business.'],
       ['Is it compliant with e-invoicing?', 'Absolutely. DR7 AI sends invoices to the Italian Interchange System (SDI) via Aruba, including penalties and damages, with credit notes.'],
       ['What support do you offer?', 'Support in Italian and English via WhatsApp and email. Pro and Enterprise plans get priority and dedicated onboarding.'],
-      ['Is there a free trial?', "Yes, you can try DR7 AI with no commitment. Book a demo and we'll set up your trial environment."],
+      ['Is there a free trial?', "Yes, you can try DR7 AI with no commitment. Email us at info@dr7ai.com and we'll set up your trial environment."],
       ['Is my data safe?', 'Data is encrypted and hosted on European infrastructure, with continuous backups and role-based access.'],
     ],
     demo: {
       h2: 'Ready to digitalize\nyour rental business?',
-      sub: "Book a free demo. We'll show you DR7 AI on your real numbers.",
-      nome: 'Name', azienda: 'Company', email: 'Email', telefono: 'Phone', veicoli: 'Number of vehicles (optional)',
-      send: 'Book a demo', sending: 'Sending…',
-      okTitle: 'Thank you! Request received.', okSub: "We'll contact you within 24 hours to schedule the demo.",
-      note: 'No commitment · Reply within 24h', err: 'Sending failed. Please retry or email us at info@dr7ai.com.',
+      sub: 'Watch the full DR7 AI demo video.',
+      cta: 'Watch the demo',
+      note: 'No commitment · Questions: info@dr7ai.com',
     },
     footer: { demo: 'Demo', pricing: 'Pricing', faq: 'FAQ' },
   },
@@ -314,9 +322,9 @@ function Navbar({ lang, setLang, t }: { lang: Lang; setLang: (l: Lang) => void; 
   }, [])
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${scrolled ? 'bg-black/70 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'}`}>
-      <nav className="mx-auto flex max-w-content items-center justify-between px-6 h-14">
+      <nav className="mx-auto flex max-w-content items-center justify-between px-6 h-20 sm:h-24">
         <a href="#top" className="flex items-center">
-          <img src={LOGO} alt="DR7 AI" className="h-10 sm:h-11 w-auto" />
+          <img src={LOGO} alt="DR7 AI" className="h-12 sm:h-16 w-auto" />
         </a>
         <div className="hidden sm:flex items-center gap-6">
           <a href="#prezzi" className="text-[13px] text-white/70 hover:text-white transition-colors">{t.nav.pricing}</a>
@@ -330,7 +338,7 @@ function Navbar({ lang, setLang, t }: { lang: Lang; setLang: (l: Lang) => void; 
               </button>
             ))}
           </div>
-          <a href="#demo" className="rounded-full bg-[#0a84ff] px-4 py-2 text-[13px] font-medium text-white transition hover:bg-[#0a84ff]/90">
+          <a href={DEMO_HREF} {...linkTarget(DEMO_HREF)} className="rounded-full bg-[#0a84ff] px-4 py-2 text-[13px] font-medium text-white transition hover:bg-[#0a84ff]/90">
             {t.nav.demo}
           </a>
         </div>
@@ -362,24 +370,6 @@ export default function App() {
   const [lang, setLang] = useState<Lang>('it')
   const t = CONTENT[lang]
   useReveal(lang)
-  const [demoSent, setDemoSent] = useState(false)
-  const [demoSending, setDemoSending] = useState(false)
-
-  async function handleDemoSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const form = e.currentTarget
-    const body = new URLSearchParams(new FormData(form) as any).toString()
-    setDemoSending(true)
-    try {
-      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
-      setDemoSent(true)
-      form.reset()
-    } catch {
-      alert(t.demo.err)
-    } finally {
-      setDemoSending(false)
-    }
-  }
 
   return (
     <div id="top" className="bg-ink text-white antialiased">
@@ -407,13 +397,13 @@ export default function App() {
       {/* ACT 3 — REVEAL (product) */}
       <Moment dark id="prodotto" className="py-20 sm:py-28">
         <div className="reveal text-center">
-          <img src={LOGO} alt="DR7 AI" className="mx-auto h-28 sm:h-44 w-auto" />
+          <img src={LOGO} alt="DR7 AI" className="mx-auto h-24 sm:h-36 md:h-44 w-auto" />
           <h2 className="mx-auto mt-7 max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest">
             {t.reveal.h}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed text-white/60">{t.reveal.sub}</p>
           <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Btn href="#demo" full>{t.reveal.cta1}</Btn>
+            <Btn href={DEMO_HREF} full>{t.reveal.cta1}</Btn>
             <Btn href="#payments" variant="ghost" full>{t.reveal.cta2}</Btn>
           </div>
         </div>
@@ -480,7 +470,7 @@ export default function App() {
                 <h3 className="text-xl font-semibold">{p.name}</h3>
                 <p className={`mt-1 text-sm ${p.highlight ? 'text-white/50' : 'text-black/50'}`}>{p.scope}</p>
                 <div className="mt-6"><span className="text-3xl font-semibold tracking-tight">{t.pricing.custom}</span></div>
-                <a href="#demo" className={`mt-6 block rounded-full py-3 text-center text-[15px] font-medium transition-colors ${p.highlight ? 'bg-[#0a84ff] text-white hover:bg-[#0a84ff]/90' : 'bg-black text-white hover:bg-black/80'}`}>
+                <a href="mailto:info@dr7ai.com" className={`mt-6 block rounded-full py-3 text-center text-[15px] font-medium transition-colors ${p.highlight ? 'bg-[#0a84ff] text-white hover:bg-[#0a84ff]/90' : 'bg-black text-white hover:bg-black/80'}`}>
                   {t.pricing.cta}
                 </a>
                 <ul className="mt-7 space-y-3 text-[15px]">
@@ -509,26 +499,9 @@ export default function App() {
         <div className="relative mx-auto max-w-3xl text-center reveal">
           <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">{t.demo.h2}</h2>
           <p className="mt-5 text-lg text-white/60">{t.demo.sub}</p>
-          {demoSent ? (
-            <div className="mx-auto mt-10 max-w-xl rounded-2xl border border-[#28c840]/30 bg-[#28c840]/10 p-8 text-center">
-              <div className="text-3xl text-[#28c840]">✓</div>
-              <p className="mt-3 text-lg font-medium text-white">{t.demo.okTitle}</p>
-              <p className="mt-1 text-sm text-white/60">{t.demo.okSub}</p>
-            </div>
-          ) : (
-            <form name="demo" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleDemoSubmit} className="mx-auto mt-10 grid max-w-xl grid-cols-1 gap-3 text-left sm:grid-cols-2">
-              <input type="hidden" name="form-name" value="demo" />
-              <p className="hidden"><label>Non compilare: <input name="bot-field" /></label></p>
-              <input required name="nome" placeholder={t.demo.nome} className="input" />
-              <input required name="azienda" placeholder={t.demo.azienda} className="input" />
-              <input required type="email" name="email" placeholder={t.demo.email} className="input" />
-              <input required name="telefono" type="tel" placeholder={t.demo.telefono} className="input" />
-              <input name="veicoli" placeholder={t.demo.veicoli} className="input sm:col-span-2" />
-              <button type="submit" disabled={demoSending} className="sm:col-span-2 mt-2 rounded-full bg-[#0a84ff] py-3.5 text-[15px] font-medium text-white transition-all hover:bg-[#0a84ff]/90 active:scale-[0.98] disabled:opacity-60">
-                {demoSending ? t.demo.sending : t.demo.send}
-              </button>
-            </form>
-          )}
+          <div className="mt-10 flex justify-center">
+            <Btn href={DEMO_HREF} full>{t.demo.cta}</Btn>
+          </div>
           <p className="mt-4 text-xs text-white/40">{t.demo.note}</p>
         </div>
       </section>
@@ -536,11 +509,11 @@ export default function App() {
       {/* FOOTER */}
       <footer className="border-t border-white/5 bg-ink px-6 py-14">
         <div className="mx-auto flex max-w-content flex-col items-center gap-6 sm:flex-row sm:justify-between">
-          <img src={LOGO} alt="DR7 AI" className="h-10 w-auto" />
+          <img src={LOGO} alt="DR7 AI" className="h-10 sm:h-12 w-auto" />
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/50">
             <a href="#prezzi" className="hover:text-white">{t.footer.pricing}</a>
             <a href="#faq" className="hover:text-white">{t.footer.faq}</a>
-            <a href="#demo" className="hover:text-white">{t.footer.demo}</a>
+            <a href={DEMO_HREF} {...linkTarget(DEMO_HREF)} className="hover:text-white">{t.footer.demo}</a>
             <a href="mailto:info@dr7ai.com" className="hover:text-white">info@dr7ai.com</a>
           </div>
           <div className="text-sm text-white/30">© 2026 DR7 AI</div>
