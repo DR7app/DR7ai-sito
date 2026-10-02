@@ -4,14 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'SF Pro Display',
-          'Inter',
-          'system-ui',
-          'sans-serif',
-        ],
+        // Stesso font del sito dr7.app
+        sans: ['Jost', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
       },
       colors: {
         ink: '#0a0a0a',
