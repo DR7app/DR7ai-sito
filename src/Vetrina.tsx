@@ -249,7 +249,7 @@ const CONTENT = {
       cta: 'Guarda la demo',
       note: 'Nessun impegno · Per informazioni: info@dr7ai.com',
     },
-    footer: { demo: 'Demo', pricing: 'Prezzi', faq: 'FAQ' },
+    footer: { demo: 'Demo', pricing: 'Prezzi', faq: 'FAQ', lang: 'Lingua' },
   },
   en: {
     nav: { story: 'Story', pricing: 'Pricing', faq: 'FAQ', demo: 'Watch the demo' },
@@ -305,14 +305,14 @@ const CONTENT = {
       cta: 'Watch the demo',
       note: 'No commitment · Questions: info@dr7ai.com',
     },
-    footer: { demo: 'Demo', pricing: 'Pricing', faq: 'FAQ' },
+    footer: { demo: 'Demo', pricing: 'Pricing', faq: 'FAQ', lang: 'Language' },
   },
 } as const
 
 const INTEGRATIONS = ['Nexi', 'Aruba · SDI', 'WhatsApp', 'Google Analytics', 'Supabase']
 
 // ── Navbar ────────────────────────────────────────────────────
-function Navbar({ lang, setLang, t }: { lang: Lang; setLang: (l: Lang) => void; t: (typeof CONTENT)['it'] }) {
+function Navbar({ t }: { t: (typeof CONTENT)['it'] }) {
   const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16)
@@ -331,13 +331,6 @@ function Navbar({ lang, setLang, t }: { lang: Lang; setLang: (l: Lang) => void; 
           <a href="#faq" className="text-[13px] text-white/70 hover:text-white transition-colors">{t.nav.faq}</a>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center border border-white/15 p-0.5 text-xs">
-            {(['it', 'en'] as Lang[]).map((l) => (
-              <button key={l} onClick={() => setLang(l)} className={`px-2.5 py-1 font-medium uppercase transition ${lang === l ? 'bg-white text-black' : 'text-white/60 hover:text-white'}`}>
-                {l}
-              </button>
-            ))}
-          </div>
           <a href={DEMO_HREF} {...linkTarget(DEMO_HREF)} className="bg-[#0a84ff] px-4 py-2 text-[13px] font-medium text-white transition hover:bg-[#0a84ff]/90">
             {t.nav.demo}
           </a>
@@ -375,7 +368,7 @@ export default function Vetrina() {
 
   return (
     <div id="top" className="bg-ink text-white antialiased">
-      <Navbar lang={lang} setLang={setLang} t={t} />
+      <Navbar t={t} />
 
       {/* ACT 1 — TENSION */}
       <Moment dark>
@@ -517,6 +510,17 @@ export default function Vetrina() {
             <a href="#faq" className="hover:text-white">{t.footer.faq}</a>
             <a href={DEMO_HREF} {...linkTarget(DEMO_HREF)} className="hover:text-white">{t.footer.demo}</a>
             <a href="mailto:info@dr7ai.com" className="hover:text-white">info@dr7ai.com</a>
+            <span className="inline-flex items-center gap-2">
+              <span className="text-white/30">{t.footer.lang}</span>
+              {(['it', 'en'] as Lang[]).map((l, i) => (
+                <span key={l} className="inline-flex items-center gap-2">
+                  {i > 0 && <span className="text-white/20">/</span>}
+                  <button onClick={() => setLang(l)} aria-pressed={lang === l} className={`uppercase transition-colors ${lang === l ? 'text-white' : 'hover:text-white'}`}>
+                    {l}
+                  </button>
+                </span>
+              ))}
+            </span>
           </div>
           <div className="text-sm text-white/30">© 2026 DR7 AI</div>
         </div>
