@@ -414,9 +414,9 @@ export default function Vetrina() {
             <div className="absolute -inset-8 -z-10 bg-gradient-to-tr from-[#0a84ff]/25 via-cyan-400/10 to-transparent blur-3xl" />
             <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/60">
               <div className="flex items-center gap-2 border-b border-white/5 bg-[#1a1a1c] px-4 py-3">
-                <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-                <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
-                <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+                <span className="h-3 w-3 bg-[#ff5f57]" />
+                <span className="h-3 w-3 bg-[#febc2e]" />
+                <span className="h-3 w-3 bg-[#28c840]" />
                 <span className="ml-3 text-xs text-white/40">{t.reveal.frame}</span>
               </div>
               <img src="/dashboard.png" alt="Dashboard DR7 AI" className="block w-full" />
@@ -497,7 +497,7 @@ export default function Vetrina() {
 
       {/* DEMO */}
       <section id="demo" className="relative overflow-hidden px-6 py-20 sm:py-28 bg-gradient-to-b from-ink via-[#0b1220] to-ink">
-        <div className="absolute left-1/2 top-0 -z-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#0a84ff]/20 blur-[120px]" />
+        <div className="absolute left-1/2 top-0 -z-0 h-96 w-96 -translate-x-1/2 bg-[#0a84ff]/20 blur-[120px]" />
         <div className="relative mx-auto max-w-3xl text-center reveal">
           <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-tight">{t.demo.h2}</h2>
           <p className="mt-5 text-lg text-white/60">{t.demo.sub}</p>
