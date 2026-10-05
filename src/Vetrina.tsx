@@ -173,6 +173,28 @@ function DocsVisual({ t }: { t: any }) {
   )
 }
 
+function TrustVisual({ t }: { t: any }) {
+  return (
+    <div className="mx-auto w-full max-w-sm border border-white/10 bg-white/[0.03] p-6">
+      <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">EMTN · Mobility Trust</span>
+        <span className="font-mono text-[11px] text-white/40">RSSMRA••••••••••</span>
+      </div>
+      <div className="flex items-end gap-3 py-6">
+        <span className="font-display text-6xl leading-none">80</span>
+        <span className="pb-1 text-sm text-white/40">/100</span>
+        <span className="mb-1 ml-auto bg-[#28c840]/15 px-2.5 py-1 text-xs font-medium text-[#28c840]">{t.tv.level}</span>
+      </div>
+      <div className="space-y-2 border-t border-white/10 pt-4 text-sm">
+        {t.tv.rows.map(([k, v]: [string, string]) => (
+          <div key={k} className="flex justify-between text-white/60"><span>{k}</span><span className="text-white/90">{v}</span></div>
+        ))}
+      </div>
+      <p className="mt-5 text-[11px] text-white/35">{t.tv.source}</p>
+    </div>
+  )
+}
+
 // ── FAQ accordion ─────────────────────────────────────────────
 function Faq({ items }: { items: readonly (readonly [string, string])[] }) {
   const [open, setOpen] = useState<number | null>(0)
@@ -196,7 +218,7 @@ function Faq({ items }: { items: readonly (readonly [string, string])[] }) {
 // ── Content (IT / EN) ─────────────────────────────────────────
 const CONTENT = {
   it: {
-    nav: { story: 'Storia', pricing: 'Prezzi', faq: 'FAQ', demo: 'Guarda la demo' },
+    nav: { story: 'Storia', emtn: 'EMTN', pricing: 'Prezzi', faq: 'FAQ', demo: 'Guarda la demo' },
     tension: { h: 'Gestisci il tuo noleggio\ncon assoluta precisione.', sub: 'Una sola piattaforma intelligente per prenotazioni, incassi e fatturazione.' },
     shift: { h: 'E se tutto parlasse\nla stessa lingua?' },
     reveal: {
@@ -217,6 +239,17 @@ const CONTENT = {
     iv: { title: 'Fattura DR7-2026-1484', status: 'Inviata a SDI', vat: 'IVA 22%', total: 'Totale' },
     cv: { body: 'Grazie per aver contattato DR7. In questo momento siamo chiusi: ogni richiesta sarà gestita con priorità alla riapertura. Disponibilità in tempo reale su dr7.app', hours: 'Lun–Ven 9–13 / 15–19 · Sab 9–17', tag: 'Risposta automatica' },
     dv: { fields: ['Nome e cognome', 'Numero patente', 'Scadenza', 'Indirizzo'] },
+    trust: {
+      eyebrow: 'EMTN · European Mobility Trust Network',
+      h: 'Sai chi guida.\nPrima delle chiavi.',
+      sub: 'EMTN è la rete di fiducia tra operatori della mobilità, inclusa solo in DR7 AI. Inserisci il codice fiscale e vedi come si è comportato il cliente presso gli altri noleggi della rete: danni, penali, pagamenti mancati.',
+      points: [
+        ['Solo con il consenso', 'Si consulta per codice fiscale, con una prenotazione attiva e un codice OTP confermato dal cliente.'],
+        ['Solo fatti documentati', 'Ogni segnalazione richiede prove e passa da una revisione manuale prima di entrare nella rete.'],
+        ['La decisione è tua', 'Il livello di fiducia è informativo: nessun blocco automatico, l’ultima parola resta sempre a te.'],
+      ],
+    },
+    tv: { level: 'Rischio molto basso', rows: [['Noleggi conclusi senza eventi', '3'], ['Segnalazioni approvate', '0'], ['Pagamenti in sospeso', '0']], source: 'Fonte: operatori della rete EMTN · dati anonimi' },
     integrationsTitle: 'Si integra con gli strumenti che già usi.',
     proofTitle: 'Non è teoria.\nÈ nato in un vero autonoleggio.',
     proofPoints: [
@@ -231,7 +264,7 @@ const CONTENT = {
       note: 'Nessun costo nascosto. Il prezzo viene definito insieme, in base alla tua flotta.',
       tiers: [
         { name: 'Starter', scope: 'Piccole flotte', features: ['Fino a 10 veicoli', 'Prenotazioni & calendario', 'Pagamenti Nexi Pay-by-Link', 'Schede cliente'], highlight: false },
-        { name: 'Pro', scope: 'Flotte in crescita', features: ['Tutto di Starter', 'Fatturazione elettronica SDI', 'Automazioni WhatsApp con AI', 'AI lettura documenti', 'Wallet fedeltà & referral'], highlight: true },
+        { name: 'Pro', scope: 'Flotte in crescita', features: ['Tutto di Starter', 'Fatturazione elettronica SDI', 'Automazioni WhatsApp con AI', 'AI lettura documenti', 'Rete EMTN · verifica clienti', 'Wallet fedeltà & referral'], highlight: true },
         { name: 'Enterprise', scope: 'Multi-sede & luxury', features: ['Veicoli illimitati', 'Multi-sede', 'API & integrazioni dedicate', 'Supporto prioritario'], highlight: false },
       ],
     },
@@ -239,6 +272,7 @@ const CONTENT = {
     faq: [
       ['Posso migrare i miei dati attuali?', 'Sì. Ti aiutiamo a importare clienti, veicoli e prenotazioni esistenti durante l’onboarding, senza fermare l’attività.'],
       ['È conforme alla fatturazione elettronica?', 'Assolutamente. DR7 AI invia le fatture al Sistema di Interscambio (SDI) tramite Aruba, incluse penali e danni, con note di credito.'],
+      ['Cos’è EMTN?', 'È la rete di fiducia tra operatori della mobilità integrata in DR7 AI. Chi noleggia condivide danni, penali e insoluti documentati; tu consulti lo storico di un cliente per codice fiscale, con il suo consenso, prima di consegnare il veicolo. I nomi degli altri operatori restano anonimi.'],
       ['Che supporto offrite?', 'Supporto in italiano e inglese via WhatsApp ed email. I piani Pro ed Enterprise hanno priorità e onboarding dedicato.'],
       ['Esiste una prova gratuita?', 'Sì, puoi provare DR7 AI senza impegno. Scrivici a info@dr7ai.com e attiviamo il tuo ambiente di prova.'],
       ['I dati sono al sicuro?', 'I dati sono cifrati e ospitati su infrastruttura europea, con backup continui e accessi a permessi/ruoli.'],
@@ -252,7 +286,7 @@ const CONTENT = {
     footer: { demo: 'Demo', pricing: 'Prezzi', faq: 'FAQ', lang: 'Lingua' },
   },
   en: {
-    nav: { story: 'Story', pricing: 'Pricing', faq: 'FAQ', demo: 'Watch the demo' },
+    nav: { story: 'Story', emtn: 'EMTN', pricing: 'Pricing', faq: 'FAQ', demo: 'Watch the demo' },
     tension: { h: 'Run your rental business\nwith absolute precision.', sub: 'One intelligent platform for bookings, payments and invoicing.' },
     shift: { h: 'What if it all spoke\nthe same language?' },
     reveal: {
@@ -273,6 +307,17 @@ const CONTENT = {
     iv: { title: 'Invoice DR7-2026-1484', status: 'Sent to SDI', vat: 'VAT 22%', total: 'Total' },
     cv: { body: "Thanks for contacting DR7. We're currently closed — every request is handled with priority when we reopen. Real-time availability at dr7.app", hours: 'Mon–Fri 9–13 / 15–19 · Sat 9–17', tag: 'Automatic reply' },
     dv: { fields: ['Full name', 'Licence number', 'Expiry', 'Address'] },
+    trust: {
+      eyebrow: 'EMTN · European Mobility Trust Network',
+      h: 'Know who’s driving.\nBefore the keys.',
+      sub: 'EMTN is the trust network between mobility operators, included only in DR7 AI. Enter the tax code and see how the customer behaved with other rental companies in the network: damages, penalties, unpaid balances.',
+      points: [
+        ['Consent first', 'Lookups are by tax code only, with an active booking and an OTP code confirmed by the customer.'],
+        ['Documented facts only', 'Every report needs evidence and goes through manual review before it reaches the network.'],
+        ['You decide', 'The trust level is informative: no automatic blocks, the final call is always yours.'],
+      ],
+    },
+    tv: { level: 'Very low risk', rows: [['Rentals completed without incidents', '3'], ['Approved reports', '0'], ['Outstanding payments', '0']], source: 'Source: EMTN network operators · anonymised data' },
     integrationsTitle: 'Works with the tools you already use.',
     proofTitle: 'Not theory.\nBuilt inside a real rental business.',
     proofPoints: [
@@ -287,7 +332,7 @@ const CONTENT = {
       note: 'No hidden costs. Pricing is defined together, based on your fleet.',
       tiers: [
         { name: 'Starter', scope: 'Small fleets', features: ['Up to 10 vehicles', 'Bookings & calendar', 'Nexi Pay-by-Link payments', 'Customer profiles'], highlight: false },
-        { name: 'Pro', scope: 'Growing fleets', features: ['Everything in Starter', 'SDI e-invoicing', 'AI WhatsApp automation', 'AI document reading', 'Loyalty wallet & referrals'], highlight: true },
+        { name: 'Pro', scope: 'Growing fleets', features: ['Everything in Starter', 'SDI e-invoicing', 'AI WhatsApp automation', 'AI document reading', 'EMTN network · customer checks', 'Loyalty wallet & referrals'], highlight: true },
         { name: 'Enterprise', scope: 'Multi-site & luxury', features: ['Unlimited vehicles', 'Multi-site', 'Dedicated API & integrations', 'Priority support'], highlight: false },
       ],
     },
@@ -295,6 +340,7 @@ const CONTENT = {
     faq: [
       ['Can I migrate my existing data?', 'Yes. We help you import existing customers, vehicles and bookings during onboarding, without stopping your business.'],
       ['Is it compliant with e-invoicing?', 'Absolutely. DR7 AI sends invoices to the Italian Interchange System (SDI) via Aruba, including penalties and damages, with credit notes.'],
+      ['What is EMTN?', 'It is the trust network between mobility operators built into DR7 AI. Rental companies share documented damages, penalties and unpaid balances; you look up a customer’s history by tax code, with their consent, before handing over the vehicle. Other operators stay anonymous.'],
       ['What support do you offer?', 'Support in Italian and English via WhatsApp and email. Pro and Enterprise plans get priority and dedicated onboarding.'],
       ['Is there a free trial?', "Yes, you can try DR7 AI with no commitment. Email us at info@dr7ai.com and we'll set up your trial environment."],
       ['Is my data safe?', 'Data is encrypted and hosted on European infrastructure, with continuous backups and role-based access.'],
@@ -327,6 +373,7 @@ function Navbar({ t }: { t: (typeof CONTENT)['it'] }) {
           <img src={LOGO} alt="DR7 AI" className="h-12 sm:h-16 w-auto" />
         </a>
         <div className="hidden sm:flex items-center gap-6">
+          <a href="#emtn" className="text-[13px] text-white/70 hover:text-white transition-colors">{t.nav.emtn}</a>
           <a href="#prezzi" className="text-[13px] text-white/70 hover:text-white transition-colors">{t.nav.pricing}</a>
           <a href="#faq" className="text-[13px] text-white/70 hover:text-white transition-colors">{t.nav.faq}</a>
         </div>
@@ -423,6 +470,26 @@ export default function Vetrina() {
       <CapabilityMoment m={t.moments.invoice} dark visual={<InvoiceVisual t={t} />} />
       <CapabilityMoment m={t.moments.whatsapp} dark={false} visual={<div className="rounded-3xl bg-ink p-5"><ChatAIVisual t={t} /></div>} />
       <CapabilityMoment m={t.moments.docs} dark visual={<DocsVisual t={t} />} />
+
+      {/* EMTN */}
+      <Moment dark id="emtn" className="bg-gradient-to-b from-ink via-[#0b1220] to-ink">
+        <div className="mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-2">
+          <div className="reveal text-center md:text-left">
+            <p className="font-mono text-xs font-normal uppercase tracking-[0.2em] text-[#0a84ff]">{t.trust.eyebrow}</p>
+            <h2 className="mt-4 whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-display font-normal leading-[1.05] tracking-tight">{t.trust.h}</h2>
+            <p className="mx-auto md:mx-0 mt-6 max-w-md text-lg leading-relaxed text-white/55">{t.trust.sub}</p>
+          </div>
+          <div className="reveal"><TrustVisual t={t} /></div>
+        </div>
+        <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3">
+          {t.trust.points.map(([title, body]) => (
+            <div key={title} className="reveal border border-white/10 bg-white/[0.03] p-7">
+              <h3 className="text-lg font-semibold">{title}</h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-white/55">{body}</p>
+            </div>
+          ))}
+        </div>
+      </Moment>
 
       {/* INTEGRATIONS */}
       <section className="bg-ink px-6 py-20 sm:py-24">
