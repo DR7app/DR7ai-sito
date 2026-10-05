@@ -31,7 +31,7 @@ export default function Elenco({
     <div>
       <div className="flex items-end justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-xl font-medium mb-1">Aziende</h1>
+          <h1 className="text-xl font-display font-normal mb-1">Aziende</h1>
           <p className="text-sm text-white/40">
             {istanze.length === 0 ? 'Nessuna azienda creata.' : (
               <>

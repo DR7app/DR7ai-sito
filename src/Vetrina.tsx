@@ -353,8 +353,8 @@ function CapabilityMoment({ m, dark, visual, id }: { m: { eyebrow: string; h: st
     <Moment dark={dark} id={id}>
       <div className="mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-2">
         <div className="reveal text-center md:text-left">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#0a84ff]">{m.eyebrow}</p>
-          <h2 className={`mt-4 whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] tracking-tight ${dark ? '' : 'text-black'}`}>
+          <p className="font-mono text-xs font-normal uppercase tracking-[0.2em] text-[#0a84ff]">{m.eyebrow}</p>
+          <h2 className={`mt-4 whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-display font-normal leading-[1.05] tracking-tight ${dark ? '' : 'text-black'}`}>
             {m.h}
           </h2>
           <p className={`mx-auto md:mx-0 mt-6 max-w-md text-lg leading-relaxed ${dark ? 'text-white/55' : 'text-black/55'}`}>{m.sub}</p>
@@ -380,7 +380,7 @@ export default function Vetrina() {
       {/* ACT 1 — TENSION */}
       <Moment dark>
         <div className="reveal text-center">
-          <h1 className="mx-auto max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest text-white/90">
+          <h1 className="mx-auto max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-display font-normal leading-[1.05] tracking-[-0.03em] text-white/90">
             {t.tension.h}
           </h1>
           <p className="mx-auto mt-7 max-w-xl text-lg sm:text-xl leading-relaxed text-white/40">{t.tension.sub}</p>
@@ -390,7 +390,7 @@ export default function Vetrina() {
       {/* ACT 2 — SHIFT */}
       <Moment dark className="bg-gradient-to-b from-ink via-[#0b1220] to-ink">
         <div className="reveal text-center">
-          <h2 className="mx-auto max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest">
+          <h2 className="mx-auto max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-display font-normal leading-[1.05] tracking-[-0.03em]">
             <span className="bg-gradient-to-r from-white to-white/40 bg-clip-text text-transparent">{t.shift.h}</span>
           </h2>
         </div>
@@ -400,7 +400,7 @@ export default function Vetrina() {
       <Moment dark id="prodotto" className="py-20 sm:py-28">
         <div className="reveal text-center">
           <img src={LOGO} alt="DR7 AI" className="mx-auto h-24 sm:h-36 md:h-44 w-auto" />
-          <h2 className="mx-auto mt-7 max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.05] tracking-tightest">
+          <h2 className="mx-auto mt-7 max-w-4xl whitespace-pre-line text-4xl sm:text-6xl md:text-7xl font-display font-normal leading-[1.05] tracking-[-0.03em]">
             {t.reveal.h}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed text-white/60">{t.reveal.sub}</p>
@@ -434,7 +434,7 @@ export default function Vetrina() {
       {/* INTEGRATIONS */}
       <section className="bg-ink px-6 py-20 sm:py-24">
         <div className="mx-auto max-w-content text-center reveal">
-          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white/80">{t.integrationsTitle}</h2>
+          <h2 className="text-2xl sm:text-3xl font-display font-normal tracking-tight text-white/80">{t.integrationsTitle}</h2>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             {INTEGRATIONS.map((i) => (
               <span key={i} className="rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm text-white/70">{i}</span>
@@ -445,7 +445,7 @@ export default function Vetrina() {
 
       {/* ACT 5 — PROOF */}
       <Moment dark className="py-20 sm:py-28">
-        <h2 className="reveal mx-auto max-w-3xl whitespace-pre-line text-center text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
+        <h2 className="reveal mx-auto max-w-3xl whitespace-pre-line text-center text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-tight">
           {t.proofTitle}
         </h2>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -462,7 +462,7 @@ export default function Vetrina() {
       <section id="prezzi" className="bg-white text-black px-6 py-20 sm:py-28">
         <div className="mx-auto max-w-content">
           <div className="text-center reveal">
-            <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">{t.pricing.h2}</h2>
+            <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-tight">{t.pricing.h2}</h2>
             <p className="mt-5 mx-auto max-w-2xl text-lg text-black/50">{t.pricing.sub}</p>
           </div>
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -471,7 +471,7 @@ export default function Vetrina() {
                 {p.highlight && <span className="mb-4 inline-block rounded-full bg-[#0a84ff] px-3 py-1 text-xs font-semibold">{t.pricing.popular}</span>}
                 <h3 className="text-xl font-semibold">{p.name}</h3>
                 <p className={`mt-1 text-sm ${p.highlight ? 'text-white/50' : 'text-black/50'}`}>{p.scope}</p>
-                <div className="mt-6"><span className="text-3xl font-semibold tracking-tight">{t.pricing.custom}</span></div>
+                <div className="mt-6"><span className="font-display text-3xl font-normal tracking-tight">{t.pricing.custom}</span></div>
                 <a href="mailto:info@dr7ai.com" className={`mt-6 block rounded-full py-3 text-center text-[15px] font-medium transition-colors ${p.highlight ? 'bg-[#0a84ff] text-white hover:bg-[#0a84ff]/90' : 'bg-black text-white hover:bg-black/80'}`}>
                   {t.pricing.cta}
                 </a>
@@ -490,7 +490,7 @@ export default function Vetrina() {
       {/* FAQ */}
       <section id="faq" className="bg-white text-black px-6 pb-20 sm:pb-28">
         <div className="mx-auto max-w-content">
-          <h2 className="mb-10 text-center text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight reveal">{t.faqTitle}</h2>
+          <h2 className="mb-10 text-center text-3xl sm:text-4xl md:text-5xl font-display font-normal tracking-tight reveal">{t.faqTitle}</h2>
           <Faq items={t.faq} />
         </div>
       </section>
@@ -499,7 +499,7 @@ export default function Vetrina() {
       <section id="demo" className="relative overflow-hidden px-6 py-20 sm:py-28 bg-gradient-to-b from-ink via-[#0b1220] to-ink">
         <div className="absolute left-1/2 top-0 -z-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#0a84ff]/20 blur-[120px]" />
         <div className="relative mx-auto max-w-3xl text-center reveal">
-          <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight">{t.demo.h2}</h2>
+          <h2 className="mx-auto max-w-2xl whitespace-pre-line text-3xl sm:text-5xl md:text-6xl font-display font-normal tracking-tight">{t.demo.h2}</h2>
           <p className="mt-5 text-lg text-white/60">{t.demo.sub}</p>
           <div className="mt-10 flex justify-center">
             <Btn href={DEMO_HREF} full>{t.demo.cta}</Btn>

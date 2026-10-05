@@ -21,7 +21,7 @@ export default function Accesso() {
     <div className="min-h-screen bg-[#0a0a0a] text-white grid place-items-center px-5">
       <form onSubmit={entra} className="w-full max-w-sm">
         <img src="/dr7-logo.png" alt="DR7 AI" className="h-9 w-auto mx-auto mb-8" />
-        <h1 className="text-lg font-medium text-center mb-1">Portale istanze</h1>
+        <h1 className="text-lg font-display font-normal text-center mb-1">Portale istanze</h1>
         <p className="text-xs text-white/40 text-center mb-8">Area riservata</p>
 
         <label className="block text-xs text-white/50 mb-1.5">Indirizzo</label>

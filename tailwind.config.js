@@ -6,6 +6,8 @@ export default {
       fontFamily: {
         // Stesso font del sito dr7.app
         sans: ['Jost', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        display: ['Bodoni Moda', 'Playfair Display', 'Georgia', 'serif'],
+        mono: ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       colors: {
         ink: '#0a0a0a',

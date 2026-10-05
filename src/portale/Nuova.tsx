@@ -88,7 +88,7 @@ export default function Nuova({
         ← Torna all elenco
       </button>
 
-      <h1 className="text-xl font-medium mb-1">Nuova azienda</h1>
+      <h1 className="text-xl font-display font-normal mb-1">Nuova azienda</h1>
       <p className="text-sm text-white/40 mb-8 max-w-2xl leading-relaxed">
         Viene creata una copia completa della piattaforma: stessa struttura, stessi automatismi,
         nessun dato di altre aziende. Database, sito e accesso del titolare nascono da soli.

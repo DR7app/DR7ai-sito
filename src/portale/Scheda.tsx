@@ -73,7 +73,7 @@ export default function Scheda({ id, onIndietro }: { id: string; onIndietro: () 
       <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
         <div>
           <div className="flex items-center gap-3 mb-1.5">
-            <h1 className="text-xl font-medium">{istanza.ragione_sociale}</h1>
+            <h1 className="text-xl font-display font-normal">{istanza.ragione_sociale}</h1>
             <Stato stato={istanza.stato} />
           </div>
           <a href={`/${istanza.slug}`} target="_blank" rel="noreferrer"
@@ -137,7 +137,7 @@ export default function Scheda({ id, onIndietro }: { id: string; onIndietro: () 
         {/* ── Avanzamento ─────────────────────────────────────────────── */}
         <section className="rounded-2xl border border-white/10 overflow-hidden">
           <div className="px-4 py-3 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
-            <h2 className="text-sm font-medium">Creazione</h2>
+            <h2 className="text-sm font-display font-normal">Creazione</h2>
             <span className="text-xs text-white/40">{fatti} di {passi.length}</span>
           </div>
           <ol>
