@@ -58,7 +58,7 @@ function Btn({
   full?: boolean
 }) {
   const base =
-    'inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-[15px] font-medium transition-all duration-300 active:scale-[0.97]'
+    'inline-flex items-center justify-center gap-2 px-7 py-3.5 text-[15px] font-medium transition-all duration-300 active:scale-[0.97]'
   const styles = {
     primary: 'bg-[#0a84ff] text-white hover:bg-[#0a84ff]/90 shadow-lg shadow-[#0a84ff]/25',
     ghost: 'text-white/90 hover:text-white border border-white/15 hover:border-white/30 backdrop-blur',
@@ -132,7 +132,7 @@ function InvoiceVisual({ t }: { t: any }) {
     <div className="mx-auto w-full max-w-sm rounded-2xl bg-white p-5 text-black shadow-2xl">
       <div className="flex items-center justify-between border-b border-black/10 pb-3">
         <span className="text-sm font-semibold">{t.iv.title}</span>
-        <span className="rounded-full bg-[#28c840]/15 px-2 py-0.5 text-xs font-medium text-[#1a9c33]">{t.iv.status}</span>
+        <span className="bg-[#28c840]/15 px-2 py-0.5 text-xs font-medium text-[#1a9c33]">{t.iv.status}</span>
       </div>
       <div className="space-y-2 py-4 text-sm">
         <div className="flex justify-between text-black/60"><span>Noleggio Ferrari 296 GTB · 3 gg</span><span>€ 1.475,41</span></div>
@@ -331,14 +331,14 @@ function Navbar({ lang, setLang, t }: { lang: Lang; setLang: (l: Lang) => void; 
           <a href="#faq" className="text-[13px] text-white/70 hover:text-white transition-colors">{t.nav.faq}</a>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center rounded-full border border-white/15 p-0.5 text-xs">
+          <div className="flex items-center border border-white/15 p-0.5 text-xs">
             {(['it', 'en'] as Lang[]).map((l) => (
-              <button key={l} onClick={() => setLang(l)} className={`rounded-full px-2.5 py-1 font-medium uppercase transition ${lang === l ? 'bg-white text-black' : 'text-white/60 hover:text-white'}`}>
+              <button key={l} onClick={() => setLang(l)} className={`px-2.5 py-1 font-medium uppercase transition ${lang === l ? 'bg-white text-black' : 'text-white/60 hover:text-white'}`}>
                 {l}
               </button>
             ))}
           </div>
-          <a href={DEMO_HREF} {...linkTarget(DEMO_HREF)} className="rounded-full bg-[#0a84ff] px-4 py-2 text-[13px] font-medium text-white transition hover:bg-[#0a84ff]/90">
+          <a href={DEMO_HREF} {...linkTarget(DEMO_HREF)} className="bg-[#0a84ff] px-4 py-2 text-[13px] font-medium text-white transition hover:bg-[#0a84ff]/90">
             {t.nav.demo}
           </a>
         </div>
@@ -411,7 +411,7 @@ export default function Vetrina() {
         </div>
         <div className="reveal mt-16 sm:mt-20">
           <div className="relative mx-auto w-full max-w-5xl">
-            <div className="absolute -inset-8 -z-10 rounded-[40px] bg-gradient-to-tr from-[#0a84ff]/25 via-cyan-400/10 to-transparent blur-3xl" />
+            <div className="absolute -inset-8 -z-10 bg-gradient-to-tr from-[#0a84ff]/25 via-cyan-400/10 to-transparent blur-3xl" />
             <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/60">
               <div className="flex items-center gap-2 border-b border-white/5 bg-[#1a1a1c] px-4 py-3">
                 <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
@@ -437,7 +437,7 @@ export default function Vetrina() {
           <h2 className="text-2xl sm:text-3xl font-display font-normal tracking-tight text-white/80">{t.integrationsTitle}</h2>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             {INTEGRATIONS.map((i) => (
-              <span key={i} className="rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm text-white/70">{i}</span>
+              <span key={i} className="border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm text-white/70">{i}</span>
             ))}
           </div>
         </div>
@@ -468,11 +468,11 @@ export default function Vetrina() {
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.pricing.tiers.map((p) => (
               <div key={p.name} className={`reveal rounded-3xl p-8 transition-transform duration-300 hover:-translate-y-1 ${p.highlight ? 'bg-ink text-white shadow-2xl ring-2 ring-[#0a84ff]' : 'bg-[#f5f5f7] text-black'}`}>
-                {p.highlight && <span className="mb-4 inline-block rounded-full bg-[#0a84ff] px-3 py-1 text-xs font-semibold">{t.pricing.popular}</span>}
+                {p.highlight && <span className="mb-4 inline-block bg-[#0a84ff] px-3 py-1 text-xs font-semibold">{t.pricing.popular}</span>}
                 <h3 className="text-xl font-semibold">{p.name}</h3>
                 <p className={`mt-1 text-sm ${p.highlight ? 'text-white/50' : 'text-black/50'}`}>{p.scope}</p>
                 <div className="mt-6"><span className="font-display text-3xl font-normal tracking-tight">{t.pricing.custom}</span></div>
-                <a href="mailto:info@dr7ai.com" className={`mt-6 block rounded-full py-3 text-center text-[15px] font-medium transition-colors ${p.highlight ? 'bg-[#0a84ff] text-white hover:bg-[#0a84ff]/90' : 'bg-black text-white hover:bg-black/80'}`}>
+                <a href="mailto:info@dr7ai.com" className={`mt-6 block py-3 text-center text-[15px] font-medium transition-colors ${p.highlight ? 'bg-[#0a84ff] text-white hover:bg-[#0a84ff]/90' : 'bg-black text-white hover:bg-black/80'}`}>
                   {t.pricing.cta}
                 </a>
                 <ul className="mt-7 space-y-3 text-[15px]">

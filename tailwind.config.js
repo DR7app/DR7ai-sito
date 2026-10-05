@@ -2,6 +2,12 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    // Angoli vivi come la piattaforma e dr7.app: nessun raggio. Resta tondo
+    // solo rounded-full, usato per i puntini decorativi.
+    borderRadius: {
+      none: '0', sm: '0', DEFAULT: '0', md: '0', lg: '0', xl: '0', '2xl': '0', '3xl': '0',
+      full: '9999px',
+    },
     extend: {
       fontFamily: {
         // Stesso font del sito dr7.app
