@@ -218,6 +218,10 @@ function Faq({ items }: { items: readonly (readonly [string, string])[] }) {
 // ── Content (IT / EN) ─────────────────────────────────────────
 const CONTENT = {
   it: {
+    seo: {
+      title: 'DR7 AI — Hub tecnologico per l’automazione e il controllo aziendale',
+      description: 'La piattaforma operativa con intelligenza artificiale per ogni tipo di noleggio — veicoli, imbarcazioni, attrezzature e altri beni — e per servizi con jet privati ed elicotteri, centri lavaggio, officine meccaniche, hotel, B&B, appartamenti, case e ville. Un unico ambiente integra scoring dell’affidabilità clienti EMTN, bot e comunicazioni automatiche, prenotazioni, calendari, preventivi, contratti con firma OTP, pagamenti, fatturazione elettronica, cauzioni, danni, penali, multe, marketing, promozioni, wallet, magazzino, personale, fornitori, amministrazione, gestione del sito e report. Regole, prezzi, servizi e autorizzazioni configurabili per collegare le attività, automatizzare il lavoro ripetitivo e mantenere il controllo dell’azienda.',
+    },
     nav: { story: 'Storia', emtn: 'EMTN', pricing: 'Prezzi', faq: 'FAQ', demo: 'Guarda la demo' },
     tension: { h: 'Gestisci il tuo noleggio\ncon assoluta precisione.', sub: 'Una sola piattaforma intelligente per prenotazioni, incassi e fatturazione.' },
     shift: { h: 'E se tutto parlasse\nla stessa lingua?' },
@@ -286,6 +290,10 @@ const CONTENT = {
     footer: { demo: 'Demo', pricing: 'Prezzi', faq: 'FAQ', lang: 'Lingua' },
   },
   en: {
+    seo: {
+      title: 'DR7 AI — Technology hub for business automation and control',
+      description: 'The AI-powered operating platform for every kind of rental — vehicles, boats, equipment and other assets — and for private jet and helicopter services, car washes, mechanical workshops, hotels, B&Bs, apartments, houses and villas. A single environment brings together EMTN customer reliability scoring, bots and automated communications, bookings, calendars, quotes, contracts with OTP signature, payments, electronic invoicing, deposits, damages, penalties, fines, marketing, promotions, wallet, inventory, staff, suppliers, administration, website management and reports. Configurable rules, prices, services and permissions to connect your operations, automate repetitive work and stay in control of your business.',
+    },
     nav: { story: 'Story', emtn: 'EMTN', pricing: 'Pricing', faq: 'FAQ', demo: 'Watch the demo' },
     tension: { h: 'Run your rental business\nwith absolute precision.', sub: 'One intelligent platform for bookings, payments and invoicing.' },
     shift: { h: 'What if it all spoke\nthe same language?' },
@@ -412,6 +420,13 @@ export default function Vetrina() {
   // compilatore servono come un tipo solo.
   const t = CONTENT[lang] as typeof CONTENT['it']
   useReveal(lang)
+  // Titolo e descrizione seguono la lingua; index.html porta quelli italiani
+  // per Google e per le anteprime di condivisione.
+  useEffect(() => {
+    document.documentElement.lang = lang
+    document.title = t.seo.title
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t.seo.description)
+  }, [lang, t])
 
   return (
     <div id="top" className="bg-ink text-white antialiased">
