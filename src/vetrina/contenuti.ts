@@ -146,7 +146,6 @@ const it = {
       ['Partenza pulita', 'Moduli, regole e messaggi pronti; nessun dato di altri. Importiamo i tuoi clienti, veicoli e prenotazioni.'],
       ['Sempre aggiornata', 'Le migliorie che nascono in DR7 arrivano anche a te.'],
     ],
-    url: 'dr7ai.com/latuaazienda',
   },
   integrazioni: 'Si collega agli strumenti che già usi',
   prezzi: {
@@ -313,7 +312,6 @@ const en: Copy = {
       ['Clean start', 'Modules, rules and messages ready; nobody else’s data. We import your customers, vehicles and bookings.'],
       ['Always up to date', 'Improvements built at DR7 reach you too.'],
     ],
-    url: 'dr7ai.com/yourcompany',
   },
   integrazioni: 'Connects to the tools you already use',
   prezzi: {

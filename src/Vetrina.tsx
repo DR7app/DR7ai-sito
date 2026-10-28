@@ -349,12 +349,6 @@ export default function Vetrina() {
       <Section surface="graphite" rhythm="lg">
         <Shell>
           <SectionHead eyebrow={t.istanza.eyebrow} title={t.istanza.h} intro={t.istanza.intro} />
-          <Reveal delay={200} className="mt-[var(--sp-lg)]">
-            <div className="flex items-center gap-4 overflow-hidden border border-white/15 bg-black px-5 py-5 md:px-8 md:py-7">
-              <span className="h-2 w-2 shrink-0 bg-[#5fd8e6]" />
-              <span className="truncate font-mono text-lg text-white/90 md:text-3xl">{t.istanza.url}</span>
-            </div>
-          </Reveal>
           <div className="mt-[var(--sp-lg)] grid gap-8 md:grid-cols-3">
             {t.istanza.punti.map(([h, d], i) => (
               <Reveal key={h} delay={i * 80} className="border-t border-white/20 pt-6">
