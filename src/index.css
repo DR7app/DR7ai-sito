@@ -2,65 +2,355 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   DR7 AI — design system della vetrina
+   --------------------------------------------------------------------------
+   Stesso linguaggio di dr7.app (~/Sito, styles/index.css): ossidiana e
+   avorio che si alternano, marmo nei momenti istituzionali, Bodoni Moda per
+   la voce editoriale, Jost per l'interfaccia, IBM Plex Mono per i metadati,
+   angoli vivi ovunque. Il marmo qui e' quello della piattaforma (nero con
+   venature ciano, il tema "DR7 AI" del gestionale), non l'oro del sito
+   noleggio: questa e' la casa del software.
+
+   Il portale (/portale) usa ancora le utility Tailwind: qui sotto nessuna
+   regola ridipinge classi come .bg-white o .text-white.
+   ========================================================================== */
+
 :root {
   color-scheme: dark;
+
+  --c-obsidian: #000000;
+  --c-graphite: #0a0a0a;
+  --c-graphite-2: #141414;
+  --c-ivory: #f8f5ee;
+  --c-ivory-dim: #e8e1d6;
+  --c-mineral: #a19c92;
+  --c-mineral-dark: #67635c;
+  --c-metal: #c9bea8;
+  --c-cyan: #5fd8e6;       /* il contorno del logo: solo dove e' il marchio */
+
+  --fg: var(--c-ivory);
+  --fg-dim: var(--c-mineral);
+  --bg: var(--c-obsidian);
+  --line: rgba(248, 245, 238, 0.12);
+  --line-strong: rgba(248, 245, 238, 0.26);
+
+  --f-display: 'Bodoni Moda', 'Playfair Display', Georgia, serif;
+  --f-ui: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-meta: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --ls-display: -0.018em;
+  --ls-nav: 0.16em;
+  --ls-label: 0.2em;
+  --ls-eyebrow: 0.3em;
+
+  --sp-sm: 1rem;
+  --sp-md: 2rem;
+  --sp-lg: 4rem;
+  --sp-xl: 7rem;
+  --sp-2xl: 11rem;
+
+  --container: 90rem;
+  --measure: 62ch;
+  --gutter: 1rem;
+
+  --mo-standard: 380ms;
+  --mo-editorial: 750ms;
+  --mo-cinematic: 1200ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (min-width: 768px) {
+  :root { --gutter: 2.5rem; }
+}
+@media (min-width: 1536px) {
+  :root { --gutter: 4rem; }
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
-  background: #0a0a0a;
-  color: #f5f5f7;
-  font-family: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--c-obsidian);
+  color: var(--c-ivory);
+  font-family: var(--f-ui);
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Prevent horizontal scroll on mobile */
-  overflow-x: hidden;
   text-rendering: optimizeLegibility;
 }
 
-/* iOS momentum + no rubber-band horizontal */
-* {
-  -webkit-tap-highlight-color: transparent;
+* { -webkit-tap-highlight-color: transparent; }
+::selection { background: rgba(201, 190, 168, 0.28); color: var(--c-ivory); }
+:focus-visible { outline: 1px solid var(--c-metal); outline-offset: 3px; }
+
+/* Il maiuscolo senza spaziatura sembra economico. */
+.uppercase:not([class*='tracking-']) { letter-spacing: 0.14em; }
+
+/* ---- Superfici ---------------------------------------------------------- */
+.surface-dark {
+  --fg: var(--c-ivory);
+  --fg-dim: var(--c-mineral);
+  --bg: var(--c-obsidian);
+  --line: rgba(248, 245, 238, 0.12);
+  --line-strong: rgba(248, 245, 238, 0.26);
+  background: var(--bg);
+  color: var(--fg);
+}
+.surface-graphite {
+  --fg: var(--c-ivory);
+  --fg-dim: var(--c-mineral);
+  --bg: var(--c-graphite);
+  --line: rgba(248, 245, 238, 0.12);
+  --line-strong: rgba(248, 245, 238, 0.26);
+  background: var(--bg);
+  color: var(--fg);
+}
+.surface-light {
+  --fg: #14150f;
+  --fg-dim: var(--c-mineral-dark);
+  --bg: var(--c-ivory);
+  --line: rgba(20, 21, 15, 0.14);
+  --line-strong: rgba(20, 21, 15, 0.3);
+  background: var(--bg);
+  color: var(--fg);
 }
 
-::selection {
-  background: rgba(10, 132, 255, 0.25);
+/* Il marmo della piattaforma: velo fitto dove passa il testo (in alto a
+   sinistra), leggero dove la lastra si guarda. */
+.marmo {
+  background-image:
+    linear-gradient(to bottom right, rgba(4, 5, 6, 0.78), rgba(4, 5, 6, 0.5) 55%, rgba(4, 5, 6, 0.28)),
+    url('/marmo-dr7ai.webp');
+  background-size: cover;
+  background-position: center;
+}
+.marmo-fitto {
+  background-image:
+    linear-gradient(rgba(4, 5, 6, 0.6), rgba(4, 5, 6, 0.86)),
+    url('/marmo-dr7ai.webp');
+  background-size: cover;
+  background-position: center;
 }
 
-/* Reveal-on-scroll base state (Apple-like) */
-.reveal {
+/* Un pannello sopra al marmo non deve sembrare un ritaglio incollato. */
+.vetro {
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+@layer components {
+  /* ---- Scala tipografica ------------------------------------------------ */
+  .t-display-xl, .t-display, .t-h1 { overflow-wrap: break-word; }
+  .whitespace-pre-line.t-display-xl,
+  .whitespace-pre-line.t-display { text-wrap: wrap; }
+
+  .t-display-xl {
+    font-family: var(--f-display);
+    font-size: clamp(2.6rem, 8vw, 7rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .t-display {
+    font-family: var(--f-display);
+    font-size: clamp(2.1rem, 5.2vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: var(--ls-display);
+    text-wrap: balance;
+  }
+  .t-h2 {
+    font-family: var(--f-display);
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+  .t-h3 {
+    font-family: var(--f-ui);
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+  }
+  .t-body-xl {
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+  .t-body-lg {
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    font-weight: 300;
+    line-height: 1.62;
+  }
+  .t-body { font-size: 0.9375rem; font-weight: 300; line-height: 1.66; }
+  .t-small { font-size: 0.8125rem; font-weight: 300; line-height: 1.6; }
+  .t-nav {
+    font-family: var(--f-ui);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: var(--ls-nav);
+    text-transform: uppercase;
+  }
+  .t-eyebrow {
+    font-family: var(--f-meta);
+    font-size: 0.625rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: var(--ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .t-meta {
+    font-family: var(--f-meta);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+  .dim { color: var(--fg-dim); }
+  .measure { max-width: var(--measure); }
+
+  /* ---- Contenitore e ritmo ---------------------------------------------- */
+  .shell {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .rhythm-sm { padding-block: var(--sp-lg); }
+  .rhythm { padding-block: var(--sp-xl); }
+  .rhythm-lg { padding-block: var(--sp-2xl); }
+  @media (max-width: 767px) {
+    .rhythm { padding-block: 5rem; }
+    .rhythm-lg { padding-block: 6.5rem; }
+  }
+
+  .rule { height: 1px; width: 100%; background: var(--line); border: 0; }
+
+  /* ---- Bottoni: pieno, contorno, testo. Il colore lo da' la superficie. -- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.0625rem 2.25rem;
+    border: 1px solid transparent;
+    font-family: var(--f-ui);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color var(--mo-standard) var(--ease-out),
+                color var(--mo-standard) var(--ease-out),
+                border-color var(--mo-standard) var(--ease-out);
+  }
+  .btn-primary { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+  .btn-primary:hover { background: transparent; color: var(--fg); }
+  .btn-secondary { background: transparent; border-color: var(--line-strong); color: var(--fg); }
+  .btn-secondary:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+  .btn-text { padding: 0.25rem 0; border: 0; background: none; color: var(--fg); position: relative; }
+  .btn-text::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 1px;
+    background: currentColor;
+    transform-origin: right;
+    transition: transform var(--mo-standard) var(--ease-out);
+  }
+  .btn-text:hover::after { transform: scaleX(0); }
+  .btn-sm { padding: 0.8125rem 1.5rem; font-size: 0.625rem; }
+
+  .link-reveal { position: relative; display: inline-block; }
+  .link-reveal::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    height: 1px; width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--mo-standard) var(--ease-out);
+  }
+  .link-reveal:hover::after { transform: scaleX(1); }
+}
+
+/* ==========================================================================
+   La firma: un filo di luce che corre lungo un filetto. Su dr7.app e'
+   metallo; qui finisce nel ciano del logo della piattaforma.
+   ========================================================================== */
+.seam-line {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.seam-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--c-metal) 40%, var(--c-cyan) 50%, var(--c-metal) 60%, transparent 100%);
+  transform: translateX(-100%);
+}
+.seam-line.is-live::after { animation: seamSweep 1.6s var(--ease-out) forwards; }
+@keyframes seamSweep {
+  0%   { transform: translateX(-140%); opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateX(400%); opacity: 0; }
+}
+
+/* ==========================================================================
+   Rivelazione allo scroll. Lo stato nascosto vive dietro .reveal-ready
+   (messa da main.tsx): se il JavaScript non parte, niente resta invisibile.
+   Il sipario ritaglia il FIGLIO: Chromium conta il clip-path dell'elemento
+   osservato e un elemento ritagliato a zero non risulta mai visibile.
+   ========================================================================== */
+.reveal-ready .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(24px);
+  transition: opacity var(--mo-editorial) var(--ease-entrance),
+              transform var(--mo-editorial) var(--ease-entrance);
+  transition-delay: var(--reveal-delay, 0ms);
 }
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+.reveal-ready .reveal.is-in { opacity: 1; transform: none; }
+.reveal-ready .reveal-mask {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path var(--mo-cinematic) var(--ease-entrance);
+  transition-delay: var(--reveal-delay, 0ms);
 }
+.reveal-ready .reveal-host.is-in .reveal-mask { clip-path: inset(0 0 0 0); }
+
+/* Nastro delle integrazioni */
+@keyframes nastro {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.nastro { animation: nastro 38s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .reveal-mask { clip-path: none !important; }
+  .nastro { animation: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
 }
 
-/* Thin, Apple-ish scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
-  border-radius: 0;
-}
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; }
+::-webkit-scrollbar-track { background: transparent; }
